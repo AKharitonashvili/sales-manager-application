@@ -1,10 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -13,6 +8,8 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Store } from '@ngrx/store';
+import { AuthActions } from 'src/app/stores/auth';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,8 +24,6 @@ import { MatInputModule } from '@angular/material/input';
   ],
 })
 export class LoginComponent {
-  @Output() loginEmmitter = new EventEmitter<boolean>();
-
   formGroup: FormGroup = new FormGroup({
     username: new FormControl<string | null>('', {
       validators: [Validators.required, Validators.minLength(8)],
@@ -37,4 +32,10 @@ export class LoginComponent {
       validators: [Validators.required, Validators.minLength(8)],
     }),
   });
+
+  constructor(private store: Store) {}
+
+  handleLogin() {
+    this.store.dispatch(AuthActions.login(this.formGroup.value));
+  }
 }
