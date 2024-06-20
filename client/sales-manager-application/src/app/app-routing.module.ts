@@ -1,10 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  // { path: 'home', component: HomeComponent },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login.component').then((x) => x.LoginComponent),
+  },
+  // {
+  //   path: 'sales-managers',
+  //   component: SalesManagersComponent,
+  // },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  // { path: '**', component: PageNotFoundComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
