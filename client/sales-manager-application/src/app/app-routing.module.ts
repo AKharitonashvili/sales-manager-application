@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  // { path: 'home', component: HomeComponent },
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./pages/home/home.component').then((x) => x.HomeComponent),
+  },
   {
     path: 'login',
     loadComponent: () =>

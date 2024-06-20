@@ -1,5 +1,11 @@
-<main class="flex flex-col gap-4">
-  <header class="flex h-10"></header>
-  <router-outlet />
-  <footer class="flex h-10"></footer>
+<main class="flex flex-col gap-4 p-4 md:p-0">
+  <ng-container *ngIf="!isUserLoggedIn; else mainContent">
+    <app-login (loginEmmitter)="handleLogin($event)" />
+  </ng-container>
+
+  <ng-template #mainContent>
+    <header class="flex h-10"></header>
+    <router-outlet />
+    <footer class="flex h-10"></footer>
+  </ng-template>
 </main>

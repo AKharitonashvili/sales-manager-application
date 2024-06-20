@@ -1,5 +1,41 @@
-<section class="flex flex-col items-center">
-  <form class="w-full max-w-sm border border-black p-4">
-    <div>hh</div>
+<section class="flex h-svh flex-col items-center justify-center">
+  <form
+    [formGroup]="formGroup"
+    class="flex w-full max-w-sm flex-col gap-6 border border-black px-4 py-6"
+  >
+    <section class="flex justify-center">
+      <h1 class="text-3xl font-bold">Login</h1>
+    </section>
+
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" />
+      <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
+        Username is required
+      </mat-error>
+      <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
+        Password minimal Length is 8
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" />
+      <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
+        Password minimal Length is 8
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      [disabled]="formGroup.invalid"
+      class="h-14 w-full bg-primary font-bold"
+      mat-flat-button
+      (click)="loginEmmitter.emit(true)"
+    >
+      Login
+    </button>
   </form>
 </section>
