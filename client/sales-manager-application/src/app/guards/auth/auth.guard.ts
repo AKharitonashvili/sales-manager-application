@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, take, tap } from 'rxjs';
-import { AuthSelectors } from 'src/app/stores/auth';
+import { AuthSelectors } from '../../../../src/app/stores/auth';
 
 @Injectable({
   providedIn: 'root',

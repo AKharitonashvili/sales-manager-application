@@ -9,7 +9,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { AuthActions } from 'src/app/stores/auth';
+import { AuthActions } from '../../../app/stores/auth';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -26,10 +26,10 @@ import { AuthActions } from 'src/app/stores/auth';
 export class LoginComponent {
   formGroup: FormGroup = new FormGroup({
     username: new FormControl<string | null>('', {
-      validators: [Validators.required, Validators.minLength(8)],
+      validators: [Validators.required, Validators.minLength(4)],
     }),
     password: new FormControl<string | null>('', {
-      validators: [Validators.required, Validators.minLength(8)],
+      validators: [Validators.required, Validators.minLength(4)],
     }),
   });
 

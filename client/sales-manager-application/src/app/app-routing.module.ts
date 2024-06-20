@@ -8,16 +8,22 @@ const routes: Routes = [
     loadComponent: () =>
       import('./pages/home/home.component').then((x) => x.HomeComponent),
     canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: 'home/products', pathMatch: 'full' },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./pages/home/pages/products/products.component').then(
+            (x) => x.ProductsComponent,
+          ),
+      },
+    ],
   },
   {
     path: 'login',
     loadComponent: () =>
       import('./pages/login/login.component').then((x) => x.LoginComponent),
   },
-  // {
-  //   path: 'sales-managers',
-  //   component: SalesManagersComponent,
-  // },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   // { path: '**', component: PageNotFoundComponent },
 ];
