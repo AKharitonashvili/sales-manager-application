@@ -1,13 +1,27 @@
-<section class="p-4">
+<section class="flex flex-col gap-4 p-4">
   <ng-container *ngIf="vm$ | async as vm">
+    <section class="flex justify-end">
+      <button class="border border-primary p-4">Add Product</button>
+    </section>
     <section class="grid grid-cols-2 gap-4 md:grid-cols-4">
       <div
-        class="flex flex-col border border-primary p-4"
+        class="flex items-center justify-between border border-primary p-4"
         *ngFor="let item of vm.products"
       >
-        <div>Name: {{ item.name }}</div>
-        <div>Price: {{ item.price }}</div>
-        <div>Quantity: {{ item.quantity }}</div>
+        <section class="flex flex-col gap-4">
+          <div>Name: {{ item.name }}</div>
+          <div>Price: {{ item.price }}</div>
+          <div>Quantity: {{ item.quantity }}</div>
+        </section>
+        <section class="flex flex-col gap-4">
+          <button class="border border-primary p-4">Edit</button>
+          <button
+            class="border border-primary p-4"
+            (click)="deleteProduct(item.id)"
+          >
+            Delete
+          </button>
+        </section>
       </div>
     </section>
   </ng-container>

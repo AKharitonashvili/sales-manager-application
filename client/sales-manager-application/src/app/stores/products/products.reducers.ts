@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { ProductsActions } from '.';
-import { Products } from '../../models/products/products.model';
+import { Product } from '../../models/products/products.model';
 
 export interface ProductsState {
   loading: boolean;
   error?: string;
-  products: Products[];
+  products: Product[];
 }
 
 export const initialState: ProductsState = {
@@ -29,6 +29,23 @@ export const productReducer = createReducer(
   ),
   on(
     ProductsActions.loadProductsFailure,
+    (state, { error }): ProductsState => ({ ...state, loading: false, error }),
+  ),
+  // Delete product
+  on(
+    ProductsActions.deleteProduct,
+    (state): ProductsState => ({ ...state, loading: true }),
+  ),
+  on(
+    ProductsActions.deleteProductSuccess,
+    (state, { id }): ProductsState => ({
+      ...state,
+      loading: false,
+      products: state.products.filter((p) => p.id !== id),
+    }),
+  ),
+  on(
+    ProductsActions.deleteProductFailure,
     (state, { error }): ProductsState => ({ ...state, loading: false, error }),
   ),
 );

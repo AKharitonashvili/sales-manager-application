@@ -9,13 +9,20 @@ const routes: Routes = [
       import('./pages/home/home.component').then((x) => x.HomeComponent),
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'home/products', pathMatch: 'full' },
+      { path: '', redirectTo: 'products', pathMatch: 'full' },
       {
         path: 'products',
         loadComponent: () =>
           import('./pages/home/pages/products/products.component').then(
             (x) => x.ProductsComponent,
           ),
+      },
+      {
+        path: 'sales-managers',
+        loadComponent: () =>
+          import(
+            './pages/home/pages/sales-managers/sales-managers.component'
+          ).then((x) => x.SalesManagersComponent),
       },
     ],
   },

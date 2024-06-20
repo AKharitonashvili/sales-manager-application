@@ -8,15 +8,28 @@ import { productsMock } from '../../../app/mock/products.mock';
 
 @Injectable()
 export class ProductsEffects {
-  login$ = createEffect(() => {
+  getProducts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductsActions.loadProducts),
       switchMap(() =>
         of(productsMock).pipe(
-          tap((v) => console.log(v)),
           map((products) => ProductsActions.loadProductsSuccess({ products })),
           catchError((error) =>
             of(ProductsActions.loadProductsFailure({ error })),
+          ),
+        ),
+      ),
+    );
+  });
+
+  deleteProduct$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ProductsActions.deleteProduct),
+      switchMap(({ id }) =>
+        of(productsMock).pipe(
+          map(() => ProductsActions.deleteProductSuccess({ id })),
+          catchError((error) =>
+            of(ProductsActions.deleteProductFailure({ error })),
           ),
         ),
       ),

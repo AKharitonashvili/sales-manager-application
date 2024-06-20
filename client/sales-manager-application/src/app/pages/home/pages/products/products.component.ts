@@ -6,7 +6,7 @@ import {
   ProductSelectors,
   ProductsActions,
 } from '../../../../../app/stores/products';
-import { Products } from '../../../../../app/models/products/products.model';
+import { Product } from '../../../../../app/models/products/products.model';
 
 @Component({
   selector: 'app-products',
@@ -17,12 +17,15 @@ import { Products } from '../../../../../app/models/products/products.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsComponent {
-  vm$: Observable<{ products: Products[] }> = combineLatest([
+  vm$: Observable<{ products: Product[] }> = combineLatest([
     this.store.select(ProductSelectors.selectProducts),
   ]).pipe(map(([products]) => ({ products })));
 
   constructor(private store: Store) {
-    console.log('constructor');
     this.store.dispatch(ProductsActions.loadProducts());
+  }
+
+  deleteProduct(id: string) {
+    this.store.dispatch(ProductsActions.deleteProduct({ id }));
   }
 }

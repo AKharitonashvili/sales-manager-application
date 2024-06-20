@@ -1,6 +1,6 @@
-import { Products } from '../models/products/products.model';
+import { Product } from '../models/products/products.model';
 
-export const productsMock: Products[] = [
+export const productsMock: Product[] = [
   {
     id: '1',
     name: 'Cool T-Shirt',
