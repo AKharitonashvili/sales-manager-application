@@ -98,7 +98,9 @@ export class ProductsComponent {
   ]).pipe(
     map(([products, filter]) => ({
       products: filter
-        ? products.filter((p) => p.name?.includes(filter))
+        ? products.filter((p) =>
+            p.name?.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
+          )
         : products,
     })),
   );

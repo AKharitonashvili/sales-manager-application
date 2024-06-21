@@ -13,6 +13,9 @@ import { AUTH_FEATURE_KEY } from './app/stores/auth/auth.selectors';
 import { PRODUCTS_FEATURE_KEY } from './app/stores/products/products.selectors';
 import { productReducer } from './app/stores/products/products.reducers';
 import { ProductsEffects } from './app/stores/products/products.effects';
+import { SALES_MANAGERS_FEATURE_KEY } from './app/stores/sales-managers/sales-managers.selectors';
+import { salesManagerReducer } from './app/stores/sales-managers/sales-managers.reducers';
+import { SalesManagersEffects } from './app/stores/sales-managers/sales-managers.effects';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -26,5 +29,10 @@ bootstrapApplication(AppComponent, {
     provideEffects([AuthEffects]),
     provideState({ name: PRODUCTS_FEATURE_KEY, reducer: productReducer }),
     provideEffects([ProductsEffects]),
+    provideState({
+      name: SALES_MANAGERS_FEATURE_KEY,
+      reducer: salesManagerReducer,
+    }),
+    provideEffects([SalesManagersEffects]),
   ],
 }).catch((err) => console.error(err));

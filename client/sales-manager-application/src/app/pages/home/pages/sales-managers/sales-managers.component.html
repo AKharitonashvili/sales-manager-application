@@ -1,6 +1,7 @@
 <app-page-layout
-  (openAddDialog)="openEditProductDialog()"
+  (openAddDialog)="openAddSalesManagerDialog()"
   [openAddDialogButtonText]="'Add Sales Manager'"
+  *ngIf="vm$ | async as vm"
 >
   <ng-container filter>
     <form
@@ -69,14 +70,40 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Filter Total Revenue</mat-label>
+        <mat-label>Filter Total Revenue Min</mat-label>
         <input
           class="border border-primary"
           type="text"
           matInput
-          [formControl]="filterForm.controls.totalRevenue"
+          [formControl]="filterForm.controls.totalSalesRevenueFrom"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Filter Total Revenue Max</mat-label>
+        <input
+          class="border border-primary"
+          type="text"
+          matInput
+          [formControl]="filterForm.controls.totalSalesRevenueTo"
         />
       </mat-form-field>
     </form>
+  </ng-container>
+
+  <ng-container items>
+    <app-card
+      *ngFor="let item of vm.salesManagers"
+      [headerText]="item.username"
+      [headerSubText]="item.name + ' ' + item.surname"
+    >
+      <ng-container details>
+        <p>Total Sales Revenue: {{ item.totalSalesRevenue | currency }}</p>
+      </ng-container>
+
+      <ng-container buttons>
+        <app-button text="Details" />
+      </ng-container>
+    </app-card>
   </ng-container>
 </app-page-layout>
