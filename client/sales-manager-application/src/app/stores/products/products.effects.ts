@@ -36,6 +36,20 @@ export class ProductsEffects {
     );
   });
 
+  editProduct$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ProductsActions.editProduct),
+      switchMap(({ product }) =>
+        of(null).pipe(
+          map(() => ProductsActions.editProductSuccess({ product })),
+          catchError((error) =>
+            of(ProductsActions.editProductFailure({ error })),
+          ),
+        ),
+      ),
+    );
+  });
+
   deleteProduct$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductsActions.deleteProduct),

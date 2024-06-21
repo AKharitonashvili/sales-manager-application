@@ -47,7 +47,7 @@ export const productsMock: Product[] = [
     price: 9.99,
     image: 'path/to/novelty_mug.jpg',
     category: 'Kitchen',
-    quantity: 10,
+    quantity: 15,
   },
   {
     id: '6',
@@ -56,7 +56,7 @@ export const productsMock: Product[] = [
     price: 29.99,
     image: 'path/to/board_game.jpg',
     category: 'Games',
-    quantity: 10,
+    quantity: 21,
   },
   {
     id: '7',
@@ -66,7 +66,7 @@ export const productsMock: Product[] = [
     price: 7.99,
     image: 'path/to/notebook.jpg',
     category: 'Office Supplies',
-    quantity: 10,
+    quantity: 31,
   },
   {
     id: '8',
@@ -85,7 +85,7 @@ export const productsMock: Product[] = [
     price: 16.99,
     image: 'path/to/water_bottle.jpg',
     category: 'Sports & Outdoors',
-    quantity: 10,
+    quantity: 100,
   },
   {
     id: '10',
@@ -94,6 +94,6 @@ export const productsMock: Product[] = [
     price: 24.99,
     image: 'path/to/cozy_blanket.jpg',
     category: 'Home & Living',
-    quantity: 10,
+    quantity: 50,
   },
 ];

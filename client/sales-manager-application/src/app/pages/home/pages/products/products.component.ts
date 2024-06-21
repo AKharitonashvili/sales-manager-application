@@ -35,11 +35,10 @@ export class ProductsComponent {
       filterControl: new FormControl<string | null>(null),
     });
 
-  Product: FormGroup<ToFormGroup<ProductForm>> = new FormGroup({
+  productForm: FormGroup<ToFormGroup<ProductForm>> = new FormGroup({
     name: new FormControl<string>('', [Validators.required]),
     price: new FormControl<number>(0, [Validators.required]),
     quantity: new FormControl<number>(0, [Validators.required]),
-    id: new FormControl<string | null>(null),
     description: new FormControl<string>(''),
     category: new FormControl<string>('', [Validators.required]),
   });
@@ -68,11 +67,18 @@ export class ProductsComponent {
 
   openEditProductDialog(product?: Product) {
     this.dialog.closeAll();
+    if (product) {
+      this.productForm.controls.name.setValue(product.name ?? '');
+      this.productForm.controls.price.setValue(product.price ?? 1);
+      this.productForm.controls.quantity.setValue(product.quantity ?? 1);
+      this.productForm.controls.description.setValue(product.description ?? '');
+      this.productForm.controls.category.setValue(product.category ?? '');
+    }
     const dialogRef = this.dialog.open(EditPostDialogComponent, {
       panelClass: ['w-full', '!max-w-md', 'p-4'],
       disableClose: true,
       data: {
-        form: this.Product,
+        form: this.productForm,
       },
     });
 
@@ -81,15 +87,23 @@ export class ProductsComponent {
       .pipe(take(1))
       .subscribe(({ success }) => {
         if (success) {
-          if (this.Product.valid) {
-            this.store.dispatch(
-              ProductsActions.addProduct({
-                product: { ...this.Product.value },
-              }),
-            );
+          if (this.productForm.valid) {
+            if (product) {
+              this.store.dispatch(
+                ProductsActions.editProduct({
+                  product: { ...this.productForm.value, id: product.id },
+                }),
+              );
+            } else {
+              this.store.dispatch(
+                ProductsActions.addProduct({
+                  product: { ...this.productForm.value },
+                }),
+              );
+            }
           }
         }
-        this.Product.reset();
+        this.productForm.reset();
       });
   }
 }

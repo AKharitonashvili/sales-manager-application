@@ -68,19 +68,30 @@ export const productReducer = createReducer(
 
   // Edit Product
   on(
-    ProductsActions.addProduct,
+    ProductsActions.editProduct,
     (state): ProductsState => ({ ...state, loading: true }),
   ),
   on(
-    ProductsActions.addProductSuccess,
-    (state, { product }): ProductsState => ({
-      ...state,
-      loading: false,
-      products: [...state.products, product],
-    }),
+    ProductsActions.editProductSuccess,
+    (state, { product }): ProductsState => {
+      const productMap = new Map<string, Product>();
+      state.products.forEach((product) =>
+        productMap.set(product.id ?? '', product),
+      );
+      console.log({ productMap, id: product });
+      if (productMap.has(product.id ?? '')) {
+        productMap.set(product.id ?? '', product);
+      }
+      console.log(Array.from(productMap.values()));
+      return {
+        ...state,
+        loading: false,
+        products: Array.from(productMap.values()),
+      };
+    },
   ),
   on(
-    ProductsActions.addProductFailure,
+    ProductsActions.editProductFailure,
     (state, { error }): ProductsState => ({ ...state, loading: false, error }),
   ),
 );

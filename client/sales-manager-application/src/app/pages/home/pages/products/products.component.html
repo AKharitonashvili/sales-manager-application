@@ -20,7 +20,7 @@
         Add Product
       </button>
     </section>
-    <section class="grid grid-cols-2 gap-4 md:grid-cols-4">
+    <section class="grid grid-cols-1 gap-4 md:grid-cols-2">
       <div
         class="flex items-center justify-between border border-primary p-4"
         *ngFor="let item of vm.products"
@@ -31,7 +31,12 @@
           <div>Quantity: {{ item.quantity }}</div>
         </section>
         <section class="flex flex-col gap-4">
-          <button class="border border-primary p-4">Edit</button>
+          <button
+            class="border border-primary p-4"
+            (click)="openEditProductDialog(item)"
+          >
+            Edit
+          </button>
           <button
             class="border border-primary p-4"
             (click)="deleteProduct(item.id ?? '')"

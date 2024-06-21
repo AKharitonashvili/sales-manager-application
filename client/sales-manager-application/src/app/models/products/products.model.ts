@@ -12,7 +12,6 @@ export interface ProductForm {
   name: string | null;
   price: number | null;
   quantity: number | null;
-  id: string | null;
   description: string | null;
   category: string | null;
 }

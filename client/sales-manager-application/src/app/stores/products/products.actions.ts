@@ -28,6 +28,21 @@ export const addProductFailure = createAction(
   props<{ error: string }>(),
 );
 
+export const editProduct = createAction(
+  '[Products] Edit Product',
+  props<{ product: Product }>(),
+);
+
+export const editProductSuccess = createAction(
+  '[Products] Edit Product Success',
+  props<{ product: Product }>(),
+);
+
+export const editProductFailure = createAction(
+  '[Products] Edit Product Failure',
+  props<{ error: string }>(),
+);
+
 export const deleteProduct = createAction(
   '[Products] Delete Product',
   props<{ id: string }>(),

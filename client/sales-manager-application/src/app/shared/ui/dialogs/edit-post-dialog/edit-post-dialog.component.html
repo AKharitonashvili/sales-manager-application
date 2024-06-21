@@ -32,6 +32,7 @@
         disableRipple
         formControlName="category"
         placeholder="Select Category"
+        [value]="form.controls.category?.value"
       >
         <mat-option *ngFor="let item of categories" [value]="item">
           {{ item }}
@@ -49,7 +50,11 @@
         discrete
         [displayWith]="formatLabel"
       >
-        <input matSliderThumb formControlName="quantity" />
+        <input
+          matSliderThumb
+          formControlName="quantity"
+          [value]="form.controls.quantity?.value"
+        />
       </mat-slider>
     </section>
 
