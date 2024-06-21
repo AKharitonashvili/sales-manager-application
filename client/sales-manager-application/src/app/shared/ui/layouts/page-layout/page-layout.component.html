@@ -1,20 +1,6 @@
 <section class="flex flex-col gap-4 p-4">
   <section class="flex flex-col justify-between md:flex-row">
-    <form
-      *ngIf="filterForm"
-      class="w-full md:max-w-sm"
-      [formGroup]="filterForm"
-    >
-      <mat-form-field>
-        <mat-label>Filter Products By Name</mat-label>
-        <input
-          class="border border-primary"
-          type="text"
-          matInput
-          [formControl]="filterForm.controls.filterControl"
-        />
-      </mat-form-field>
-    </form>
+    <ng-content select="[filter]"></ng-content>
 
     <app-button
       text="Add Product"

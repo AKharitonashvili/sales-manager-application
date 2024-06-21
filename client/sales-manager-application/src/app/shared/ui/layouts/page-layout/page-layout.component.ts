@@ -32,6 +32,7 @@ export class PageLayoutComponent {
   @Input() filterForm!: FormGroup<
     ToFormGroup<{ filterControl: string | null }>
   >;
+  @Input() filterInputLabel!: string;
 
   @Output() openAddDialog = new EventEmitter();
 }

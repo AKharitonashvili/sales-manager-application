@@ -57,6 +57,19 @@
       </section>
     </section>
 
+    <mat-form-field>
+      <mat-label>Description Of Product</mat-label>
+      <textarea
+        placeholder="Provide description of product if necessary"
+        formControlName="description"
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5"
+      ></textarea>
+    </mat-form-field>
+
     <section class="flex items-center justify-end">
       <app-button [text]="'Submit'" (onClick)="close(true)"></app-button>
     </section>

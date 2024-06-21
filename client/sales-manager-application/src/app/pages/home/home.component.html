@@ -1,8 +1,11 @@
 <main class="flex flex-col gap-4 md:p-0">
-  <header class="flex bg-gray-800 p-4 text-white">
+  <header class="flex bg-gray-800 p-4">
     <nav class="flex gap-4">
-      <app-button [text]="'Products'"></app-button>
-      <app-button [text]="'Sales Managers'"></app-button>
+      <app-button [text]="'Products'" [routerLink]="'products'"></app-button>
+      <app-button
+        [text]="'Sales Managers'"
+        [routerLink]="'sales-managers'"
+      ></app-button>
     </nav>
   </header>
   <router-outlet />

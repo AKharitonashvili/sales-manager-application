@@ -36,6 +36,7 @@ import {
 } from '@angular/material/paginator';
 import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
 import { PageLayoutComponent } from 'src/app/shared/ui/layouts/page-layout/page-layout.component';
+import { CardComponent } from 'src/app/shared/ui/cards/card/card.component';
 
 @Component({
   selector: 'app-products',
@@ -47,6 +48,8 @@ import { PageLayoutComponent } from 'src/app/shared/ui/layouts/page-layout/page-
     MatPaginatorModule,
     ButtonComponent,
     PageLayoutComponent,
+    ReactiveFormsModule,
+    CardComponent,
   ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
@@ -63,6 +66,7 @@ export class ProductsComponent {
     price: new FormControl<number>(0, [Validators.required]),
     quantity: new FormControl<number>(0, [Validators.required]),
     category: new FormControl<string>('', [Validators.required]),
+    description: new FormControl<string>(''),
   });
 
   paginationSubject$ = new BehaviorSubject<{
@@ -117,6 +121,7 @@ export class ProductsComponent {
       this.productForm.controls.price.setValue(product.price ?? 1);
       this.productForm.controls.quantity.setValue(product.quantity ?? 1);
       this.productForm.controls.category.setValue(product.category ?? '');
+      this.productForm.controls.description.setValue(product.description ?? '');
     }
     const dialogRef = this.dialog.open(EditPostDialogComponent, {
       panelClass: ['w-full', '!max-w-md', 'p-4'],

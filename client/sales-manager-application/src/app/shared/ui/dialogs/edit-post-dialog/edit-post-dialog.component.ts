@@ -41,9 +41,7 @@ export class EditPostDialogComponent {
     private dialogRef: MatDialogRef<EditPostDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: { form: FormGroup<ToFormGroup<Product>> },
-  ) {
-    console.log(data.form.value);
-  }
+  ) {}
 
   formatLabel(value: number): string {
     return value === 100 ? '99+' : `${value}`;

@@ -1,6 +1,11 @@
 * {
   box-sizing: border-box;
   @apply rounded-md;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 // Tailwind CSS

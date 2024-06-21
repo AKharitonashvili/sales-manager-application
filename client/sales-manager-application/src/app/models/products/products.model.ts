@@ -5,6 +5,7 @@ export interface Product {
   id?: string | null;
   image?: string | null;
   category?: string | null;
+  description?: string | null;
 }
 
 export interface ProductForm {
@@ -12,4 +13,5 @@ export interface ProductForm {
   price: number | null;
   quantity: number | null;
   category: string | null;
+  description: string | null;
 }

@@ -1,32 +1,46 @@
 <app-page-layout
   *ngIf="vm$ | async as vm"
-  [filterForm]="filterForm"
+  [filterInputLabel]="'Filter Products by Name'"
   (openAddDialog)="openEditProductDialog()"
 >
-  <ng-container items>
-    <div
-      class="flex items-center justify-between border border-primary p-4"
-      *ngFor="let item of vm.products"
+  <ng-container filter>
+    <form
+      *ngIf="filterForm"
+      class="w-full md:max-w-sm"
+      [formGroup]="filterForm"
     >
-      <section class="flex flex-col justify-stretch gap-4">
-        <div>Name: {{ item.name }}</div>
-        <div>Price: {{ item.price }}</div>
-        <div>Quantity: {{ item.quantity }}</div>
-      </section>
-      <section class="flex flex-col gap-4">
-        <app-button
-          class="w-full"
-          text="Edit"
-          customClasses="w-full"
-          (onClick)="openEditProductDialog(item)"
-        ></app-button>
-        <app-button
-          text="Delete"
-          customClasses="w-full"
-          (onClick)="deleteProduct(item.id ?? '')"
-        ></app-button>
-      </section>
-    </div>
+      <mat-form-field>
+        <mat-label>Filter Products by Name</mat-label>
+        <input
+          class="border border-primary"
+          type="text"
+          matInput
+          [formControl]="filterForm.controls.filterControl"
+        />
+      </mat-form-field>
+    </form>
+  </ng-container>
+
+  <ng-container items>
+    <app-card
+      *ngFor="let item of vm.products"
+      [headerText]="item.name"
+      [headerSubText]="item.category"
+    >
+      <ng-container description>
+        <p>{{ item.description }}</p>
+      </ng-container>
+
+      <ng-container details>
+        <p>Price: {{ item.price | currency }}</p>
+        <p class="text-gray-500">{{ item.quantity }} left in stock</p>
+      </ng-container>
+
+      <ng-container buttons>
+        <app-button text="Edit" (onClick)="openEditProductDialog(item)" />
+        <app-button text="Delete" (onClick)="deleteProduct(item.id ?? '')" />
+      </ng-container>
+    </app-card>
   </ng-container>
   <ng-container pagination>
     <mat-paginator
