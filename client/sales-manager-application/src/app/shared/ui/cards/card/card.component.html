@@ -1,0 +1,24 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="flex items-center justify-center">
+      <mat-icon>
+        <span class="material-symbols-outlined"> image </span>
+      </mat-icon>
+    </div>
+    <mat-card-title>{{ headerText }}</mat-card-title>
+    <mat-card-subtitle>{{ headerSubText }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <ng-content select="[description]"></ng-content>
+    <section class="flex flex-col items-end">
+      <ng-content select="[details]"></ng-content>
+    </section>
+  </mat-card-content>
+
+  <mat-card-actions class="w-full">
+    <section class="flex w-full justify-end gap-4">
+      <ng-content select="[buttons]" />
+    </section>
+  </mat-card-actions>
+</mat-card>
