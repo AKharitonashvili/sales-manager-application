@@ -18,7 +18,10 @@ export const addProduct = createAction(
   props<{ product: Product }>(),
 );
 
-export const addProductSuccess = createAction('[Products] Add Product Success');
+export const addProductSuccess = createAction(
+  '[Products] Add Product Success',
+  props<{ product: Product }>(),
+);
 
 export const addProductFailure = createAction(
   '[Products] Add Product Failure',

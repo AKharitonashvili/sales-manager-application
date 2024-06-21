@@ -22,11 +22,25 @@ export class ProductsEffects {
     );
   });
 
+  addProduct$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ProductsActions.addProduct),
+      switchMap(({ product }) =>
+        of(null).pipe(
+          map(() => ProductsActions.addProductSuccess({ product })),
+          catchError((error) =>
+            of(ProductsActions.addProductFailure({ error })),
+          ),
+        ),
+      ),
+    );
+  });
+
   deleteProduct$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductsActions.deleteProduct),
       switchMap(({ id }) =>
-        of(productsMock).pipe(
+        of(null).pipe(
           map(() => ProductsActions.deleteProductSuccess({ id })),
           catchError((error) =>
             of(ProductsActions.deleteProductFailure({ error })),

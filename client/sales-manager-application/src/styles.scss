@@ -29,6 +29,9 @@ button,
 a {
   @apply cursor-pointer;
   &:disabled {
-    @apply opacity-50;
+    opacity: 0.5 !important;
+  }
+  &:hover {
+    @apply opacity-80;
   }
 }

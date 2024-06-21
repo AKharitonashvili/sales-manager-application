@@ -1,0 +1,66 @@
+<section class="flex flex-col gap-4 p-4">
+  <section class="flex items-center justify-end">
+    <button (click)="close()"><mat-icon>close</mat-icon></button>
+  </section>
+  <form *ngIf="data.form as form" [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Name Of Product</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Price Of Product</mat-label>
+      <input
+        placeholder="Price in $ currency"
+        matInput
+        formControlName="price"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description Of Product</mat-label>
+      <input
+        placeholder="Description is optional"
+        matInput
+        formControlName="description"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select an Categiry option</mat-label>
+      <mat-select
+        disableRipple
+        formControlName="category"
+        placeholder="Select Category"
+      >
+        <mat-option *ngFor="let item of categories" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <section class="flex items-center justify-end gap-4">
+      <p>Quantity Of Product:</p>
+      <mat-slider
+        min="1"
+        max="100"
+        step="1"
+        showTickMarks
+        discrete
+        [displayWith]="formatLabel"
+      >
+        <input matSliderThumb formControlName="quantity" />
+      </mat-slider>
+    </section>
+
+    <section class="flex items-center justify-end">
+      <button
+        [disabled]="form.invalid"
+        class="border border-primary bg-primary px-4 py-2 font-bold"
+        (click)="close(true)"
+      >
+        Submit
+      </button>
+    </section>
+  </form>
+</section>

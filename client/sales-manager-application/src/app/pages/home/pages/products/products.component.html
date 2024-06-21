@@ -1,7 +1,24 @@
 <section class="flex flex-col gap-4 p-4">
   <ng-container *ngIf="vm$ | async as vm">
-    <section class="flex justify-end">
-      <button class="border border-primary p-4">Add Product</button>
+    <section class="flex flex-col justify-between md:flex-row">
+      <form class="w-full md:max-w-sm" [formGroup]="filterForm">
+        <mat-form-field>
+          <mat-label>Filter Products By Name</mat-label>
+          <input
+            class="border border-primary"
+            type="text"
+            matInput
+            [formControl]="filterForm.controls.filterControl"
+          />
+        </mat-form-field>
+      </form>
+
+      <button
+        class="border border-primary p-4"
+        (click)="openEditProductDialog()"
+      >
+        Add Product
+      </button>
     </section>
     <section class="grid grid-cols-2 gap-4 md:grid-cols-4">
       <div
@@ -17,7 +34,7 @@
           <button class="border border-primary p-4">Edit</button>
           <button
             class="border border-primary p-4"
-            (click)="deleteProduct(item.id)"
+            (click)="deleteProduct(item.id ?? '')"
           >
             Delete
           </button>

@@ -31,7 +31,7 @@ export const productReducer = createReducer(
     ProductsActions.loadProductsFailure,
     (state, { error }): ProductsState => ({ ...state, loading: false, error }),
   ),
-  // Delete product
+  // Delete Product
   on(
     ProductsActions.deleteProduct,
     (state): ProductsState => ({ ...state, loading: true }),
@@ -46,6 +46,41 @@ export const productReducer = createReducer(
   ),
   on(
     ProductsActions.deleteProductFailure,
+    (state, { error }): ProductsState => ({ ...state, loading: false, error }),
+  ),
+  // Add Product
+  on(
+    ProductsActions.addProduct,
+    (state): ProductsState => ({ ...state, loading: true }),
+  ),
+  on(
+    ProductsActions.addProductSuccess,
+    (state, { product }): ProductsState => ({
+      ...state,
+      loading: false,
+      products: [...state.products, product],
+    }),
+  ),
+  on(
+    ProductsActions.addProductFailure,
+    (state, { error }): ProductsState => ({ ...state, loading: false, error }),
+  ),
+
+  // Edit Product
+  on(
+    ProductsActions.addProduct,
+    (state): ProductsState => ({ ...state, loading: true }),
+  ),
+  on(
+    ProductsActions.addProductSuccess,
+    (state, { product }): ProductsState => ({
+      ...state,
+      loading: false,
+      products: [...state.products, product],
+    }),
+  ),
+  on(
+    ProductsActions.addProductFailure,
     (state, { error }): ProductsState => ({ ...state, loading: false, error }),
   ),
 );
