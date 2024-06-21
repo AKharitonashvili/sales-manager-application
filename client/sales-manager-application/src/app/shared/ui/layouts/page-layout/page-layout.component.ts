@@ -29,10 +29,8 @@ import { MatInputModule } from '@angular/material/input';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageLayoutComponent {
-  @Input() filterForm!: FormGroup<
-    ToFormGroup<{ filterControl: string | null }>
-  >;
   @Input() filterInputLabel!: string;
+  @Input() openAddDialogButtonText!: string;
 
   @Output() openAddDialog = new EventEmitter();
 }

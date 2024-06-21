@@ -1,9 +1,14 @@
 <section class="flex flex-col gap-4 p-4">
-  <section class="flex flex-col justify-between md:flex-row">
-    <ng-content select="[filter]"></ng-content>
+  <section class="flex flex-col justify-between gap-4" [ngClass]="">
+    <section class="flex flex-col gap-4">
+      <h3>Filters</h3>
+      <ng-content select="[filter]"></ng-content>
+    </section>
 
     <app-button
-      text="Add Product"
+      [text]="openAddDialogButtonText"
+      class="flex justify-end"
+      [customClasses]="'w-full md:w-auto'"
       (onClick)="openAddDialog.emit()"
     ></app-button>
   </section>
