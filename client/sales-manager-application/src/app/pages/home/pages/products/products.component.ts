@@ -35,17 +35,18 @@ import {
   PageEvent,
 } from '@angular/material/paginator';
 import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
+import { PageLayoutComponent } from 'src/app/shared/ui/layouts/page-layout/page-layout.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     MatInputModule,
     MatDialogModule,
     MatPaginatorModule,
     ButtonComponent,
+    PageLayoutComponent,
   ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
@@ -119,7 +120,6 @@ export class ProductsComponent {
     }
     const dialogRef = this.dialog.open(EditPostDialogComponent, {
       panelClass: ['w-full', '!max-w-md', 'p-4'],
-      disableClose: true,
       data: {
         form: this.productForm,
       },
@@ -127,7 +127,10 @@ export class ProductsComponent {
 
     dialogRef
       .afterClosed()
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        map((v) => (v ? v : { success: false })),
+      )
       .subscribe(({ success }) => {
         if (success) {
           if (this.productForm.valid) {

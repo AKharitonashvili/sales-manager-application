@@ -1,58 +1,41 @@
-<section class="flex flex-col gap-4 p-4">
-  <ng-container *ngIf="vm$ | async as vm">
-    <section class="flex flex-col justify-between md:flex-row">
-      <form class="w-full md:max-w-sm" [formGroup]="filterForm">
-        <mat-form-field>
-          <mat-label>Filter Products By Name</mat-label>
-          <input
-            class="border border-primary"
-            type="text"
-            matInput
-            [formControl]="filterForm.controls.filterControl"
-          />
-        </mat-form-field>
-      </form>
-
-      <app-button
-        text="Add Product"
-        (onClick)="openEditProductDialog()"
-      ></app-button>
-    </section>
-    <section class="grid grid-cols-1 gap-4 md:grid-cols-2">
-      <div
-        class="flex items-center justify-between border border-primary p-4"
-        *ngFor="let item of vm.products"
-      >
-        <section class="flex flex-col justify-stretch gap-4">
-          <div>Name: {{ item.name }}</div>
-          <div>Price: {{ item.price }}</div>
-          <div>Quantity: {{ item.quantity }}</div>
-        </section>
-        <section class="flex flex-col gap-4">
-          <app-button
-            class="w-full"
-            text="Edit"
-            customClasses="w-full"
-            (onClick)="openEditProductDialog(item)"
-          ></app-button>
-          <app-button
-            text="Delete"
-            customClasses="w-full"
-            (onClick)="deleteProduct(item.id ?? '')"
-          ></app-button>
-        </section>
-      </div>
-    </section>
-    <section class="flex justify-center">
-      <mat-paginator
-        (page)="handlePageEvent($event)"
-        [length]="paginationLength$ | async"
-        [pageSize]="(paginationSubject$ | async)?.pageSize"
-        [showFirstLastButtons]="true"
-        [pageSizeOptions]="[10, 20, 40, 80, 100]"
-        [pageIndex]="(paginationSubject$ | async)?.pageIndex"
-      >
-      </mat-paginator>
-    </section>
+<app-page-layout
+  *ngIf="vm$ | async as vm"
+  [filterForm]="filterForm"
+  (openAddDialog)="openEditProductDialog()"
+>
+  <ng-container items>
+    <div
+      class="flex items-center justify-between border border-primary p-4"
+      *ngFor="let item of vm.products"
+    >
+      <section class="flex flex-col justify-stretch gap-4">
+        <div>Name: {{ item.name }}</div>
+        <div>Price: {{ item.price }}</div>
+        <div>Quantity: {{ item.quantity }}</div>
+      </section>
+      <section class="flex flex-col gap-4">
+        <app-button
+          class="w-full"
+          text="Edit"
+          customClasses="w-full"
+          (onClick)="openEditProductDialog(item)"
+        ></app-button>
+        <app-button
+          text="Delete"
+          customClasses="w-full"
+          (onClick)="deleteProduct(item.id ?? '')"
+        ></app-button>
+      </section>
+    </div>
   </ng-container>
-</section>
+  <ng-container pagination>
+    <mat-paginator
+      (page)="handlePageEvent($event)"
+      [length]="paginationLength$ | async"
+      [pageSize]="(paginationSubject$ | async)?.pageSize"
+      [showFirstLastButtons]="true"
+      [pageSizeOptions]="[10, 20, 40, 80, 100]"
+      [pageIndex]="(paginationSubject$ | async)?.pageIndex"
+    ></mat-paginator
+  ></ng-container>
+</app-page-layout>
