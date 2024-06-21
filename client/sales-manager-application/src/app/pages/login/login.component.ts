@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import { AuthActions } from '../../../app/stores/auth';
+import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +22,7 @@ import { AuthActions } from '../../../app/stores/auth';
     MatInputModule,
     ReactiveFormsModule,
     CommonModule,
+    ButtonComponent,
   ],
 })
 export class LoginComponent {

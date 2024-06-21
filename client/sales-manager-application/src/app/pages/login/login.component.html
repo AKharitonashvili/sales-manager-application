@@ -29,13 +29,11 @@
       </mat-error>
     </mat-form-field>
 
-    <button
+    <app-button
+      text="Login"
       [disabled]="formGroup.invalid"
-      class="h-14 w-full bg-primary font-bold"
-      mat-flat-button
-      (click)="handleLogin()"
-    >
-      Login
-    </button>
+      customClasses="w-full"
+      (onClick)="handleLogin()"
+    ></app-button>
   </form>
 </section>

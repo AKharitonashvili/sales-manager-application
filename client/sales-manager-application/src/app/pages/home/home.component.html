@@ -1,17 +1,8 @@
 <main class="flex flex-col gap-4 md:p-0">
   <header class="flex bg-gray-800 p-4 text-white">
     <nav class="flex gap-4">
-      <button
-        class="flex items-center justify-center border border-primary p-4"
-        routerLink="products"
-      >
-        Products
-      </button>
-      <button
-        class="flex items-center justify-center border border-primary p-4"
-      >
-        Sale Managers
-      </button>
+      <app-button [text]="'Products'"></app-button>
+      <app-button [text]="'Sales Managers'"></app-button>
     </nav>
   </header>
   <router-outlet />

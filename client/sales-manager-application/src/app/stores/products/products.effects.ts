@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { ProductsActions } from '.';
 import { Router } from '@angular/router';
-import { productsMock } from '../../../app/mock/products.mock';
+import { productsMock } from '../../shared/mock/products.mock';
 
 @Injectable()
 export class ProductsEffects {
@@ -64,8 +64,5 @@ export class ProductsEffects {
     );
   });
 
-  constructor(
-    private actions$: Actions,
-    private router: Router,
-  ) {}
+  constructor(private actions$: Actions) {}
 }

@@ -3,9 +3,10 @@
     <button (click)="close()"><mat-icon>close</mat-icon></button>
   </section>
   <form *ngIf="data.form as form" [formGroup]="form">
-    <mat-form-field>
+    <mat-form-field class="mb-4">
       <mat-label>Name Of Product</mat-label>
-      <input matInput formControlName="name" />
+      <input matInput formControlName="name" latinLettersOnly />
+      <mat-hint>Input restricted to Latin letters only.</mat-hint>
     </mat-form-field>
 
     <mat-form-field>
@@ -14,6 +15,8 @@
         placeholder="Price in $ currency"
         matInput
         formControlName="price"
+        type="number"
+        selectOnFocus
       />
     </mat-form-field>
 
@@ -40,32 +43,31 @@
       </mat-select>
     </mat-form-field>
 
-    <section class="flex items-center justify-end gap-4">
-      <p>Quantity Of Product:</p>
-      <mat-slider
-        min="1"
-        max="100"
-        step="1"
-        showTickMarks
-        discrete
-        [displayWith]="formatLabel"
-      >
-        <input
-          matSliderThumb
-          formControlName="quantity"
-          [value]="form.controls.quantity?.value"
-        />
-      </mat-slider>
+    <section class="flex flex-col items-end justify-center">
+      <section class="flex justify-end">
+        <p class="font-bold">{{ form.controls.quantity?.value ?? 0 }}</p>
+      </section>
+      <section class="flex items-center gap-4">
+        <p>Quantity Of Product:</p>
+        <mat-slider
+          min="1"
+          max="100"
+          step="1"
+          showTickMarks
+          discrete
+          [displayWith]="formatLabel"
+        >
+          <input
+            matSliderThumb
+            formControlName="quantity"
+            [value]="form.controls.quantity?.value"
+          />
+        </mat-slider>
+      </section>
     </section>
 
     <section class="flex items-center justify-end">
-      <button
-        [disabled]="form.invalid"
-        class="border border-primary bg-primary px-4 py-2 font-bold"
-        (click)="close(true)"
-      >
-        Submit
-      </button>
+      <app-button [text]="'Submit'" (onClick)="close(true)"></app-button>
     </section>
   </form>
 </section>

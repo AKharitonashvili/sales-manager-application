@@ -1,0 +1,8 @@
+<button
+  [disabled]="disabled"
+  class="border border-primary bg-primary px-4 py-2 font-bold"
+  [ngClass]="customClasses"
+  (click)="onClick.emit()"
+>
+  {{ text }}
+</button>

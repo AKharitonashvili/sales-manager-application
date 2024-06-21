@@ -1,6 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable, combineLatest, map, startWith, take } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  combineLatest,
+  map,
+  startWith,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
   ProductSelectors,
@@ -20,11 +29,24 @@ import { MatInputModule } from '@angular/material/input';
 import { ToFormGroup } from '../../../../../app/models/shared.moelds';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EditPostDialogComponent } from '../../../../../app/shared/ui/dialogs/edit-post-dialog/edit-post-dialog.component';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
+import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatDialogModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    ButtonComponent,
+  ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,12 +61,34 @@ export class ProductsComponent {
     name: new FormControl<string>('', [Validators.required]),
     price: new FormControl<number>(0, [Validators.required]),
     quantity: new FormControl<number>(0, [Validators.required]),
-    description: new FormControl<string>(''),
     category: new FormControl<string>('', [Validators.required]),
   });
 
+  paginationSubject$ = new BehaviorSubject<{
+    pageIndex: number;
+    pageSize: number;
+  }>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
+  paginationLength$ = new BehaviorSubject<number>(0);
+
   vm$: Observable<{ products: Product[] }> = combineLatest([
-    this.store.select(ProductSelectors.selectProducts),
+    this.store.select(ProductSelectors.selectProducts).pipe(
+      tap((products) => this.paginationLength$.next(products.length)),
+      switchMap((products) =>
+        this.paginationSubject$.pipe(
+          map(({ pageIndex, pageSize }) =>
+            products.filter(
+              (item, index) =>
+                index >= pageIndex * pageSize &&
+                index < pageIndex * pageSize + pageSize,
+            ),
+          ),
+        ),
+      ),
+    ),
     this.filterForm.controls.filterControl.valueChanges.pipe(startWith(null)),
   ]).pipe(
     map(([products, filter]) => ({
@@ -71,7 +115,6 @@ export class ProductsComponent {
       this.productForm.controls.name.setValue(product.name ?? '');
       this.productForm.controls.price.setValue(product.price ?? 1);
       this.productForm.controls.quantity.setValue(product.quantity ?? 1);
-      this.productForm.controls.description.setValue(product.description ?? '');
       this.productForm.controls.category.setValue(product.category ?? '');
     }
     const dialogRef = this.dialog.open(EditPostDialogComponent, {
@@ -105,5 +148,11 @@ export class ProductsComponent {
         }
         this.productForm.reset();
       });
+  }
+
+  handlePageEvent(e: PageEvent) {
+    console.log(e);
+    const { pageSize, pageIndex } = e;
+    this.paginationSubject$.next({ pageIndex, pageSize });
   }
 }
