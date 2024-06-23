@@ -10,9 +10,12 @@
   </mat-card-header>
 
   <mat-card-content class="!flex flex-col gap-4">
-    <section class="h-24 overflow-y-scroll">
-      <ng-content select="[description]"></ng-content>
-    </section>
+    <ng-container *ngIf="!hideDescription">
+      <section class="h-24 overflow-y-scroll">
+        <ng-content select="[description]"></ng-content>
+      </section>
+    </ng-container>
+
     <section class="flex flex-col items-end">
       <ng-content select="[details]"></ng-content>
     </section>

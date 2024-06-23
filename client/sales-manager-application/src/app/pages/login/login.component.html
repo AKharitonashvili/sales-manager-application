@@ -15,7 +15,7 @@
         Username is required
       </mat-error>
       <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
-        Password minimal Length is 8
+        Password minimal Length is 4
       </mat-error>
     </mat-form-field>
 
@@ -26,7 +26,7 @@
         Password is required
       </mat-error>
       <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
-        Password minimal Length is 8
+        Password minimal Length is 4
       </mat-error>
     </mat-form-field>
   </ng-container>

@@ -78,11 +78,9 @@ export const productReducer = createReducer(
       state.products.forEach((product) =>
         productMap.set(product.id ?? '', product),
       );
-      console.log({ productMap, id: product });
       if (productMap.has(product.id ?? '')) {
         productMap.set(product.id ?? '', product);
       }
-      console.log(Array.from(productMap.values()));
       return {
         ...state,
         loading: false,

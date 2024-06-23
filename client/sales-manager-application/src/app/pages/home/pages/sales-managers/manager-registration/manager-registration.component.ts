@@ -10,6 +10,12 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import {
+  salesManagersActions,
+  salesManagersSelectors,
+} from 'src/app/stores/sales-managers';
+import { Observable, combineLatest, take } from 'rxjs';
 
 @Component({
   selector: 'app-manager-registration',
@@ -41,9 +47,22 @@ export class ManagerRegistrationComponent {
     }),
   });
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private store: Store,
+  ) {}
 
   handleRegister() {
-    this.router.navigateByUrl('home/sales-managers');
+    this.store.dispatch(
+      salesManagersActions.addSalesManager({
+        salesManager: this.formGroup.value,
+      }),
+    );
+    this.store
+      .select(salesManagersSelectors.selectRegistrationSuccess)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.router.navigateByUrl('home/sales-managers');
+      });
   }
 }

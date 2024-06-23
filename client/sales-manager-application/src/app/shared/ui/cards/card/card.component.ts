@@ -14,4 +14,5 @@ import { MatIconModule } from '@angular/material/icon';
 export class CardComponent {
   @Input() headerText!: string | null | undefined;
   @Input() headerSubText!: string | null | undefined;
+  @Input() hideDescription!: boolean;
 }

@@ -17,7 +17,7 @@
         </section>
         <section class="grid grid-cols-3 gap-4">
           <app-card
-            *ngFor="let item of vm.products"
+            *ngFor="let item of manager.products"
             [headerText]="item.name"
             [headerSubText]="item.category"
           >

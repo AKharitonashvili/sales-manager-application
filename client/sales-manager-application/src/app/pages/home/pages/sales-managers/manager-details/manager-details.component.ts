@@ -23,20 +23,16 @@ import { Product, SoldProduct } from 'src/app/models/products/products.model';
 export class ManagerDetailsComponent {
   vm$: Observable<{
     manager: SalesManager | undefined;
-    products: SoldProduct[] | undefined;
   }> = combineLatest([
     this.store.select(
       salesManagersSelectors.selectSalesManagerById(
         this.route.snapshot.paramMap.get('id') ?? '',
       ),
     ),
-    this.store.select(salesManagersSelectors.selectSalesManagerProducts),
   ]).pipe(
-    map(([manager, products]) => ({
+    map(([manager]) => ({
       manager,
-      products,
     })),
-    tap(console.log),
   );
 
   constructor(

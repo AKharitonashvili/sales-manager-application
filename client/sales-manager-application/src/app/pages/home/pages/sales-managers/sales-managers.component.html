@@ -102,14 +102,12 @@
       *ngFor="let item of vm.salesManagers"
       [headerText]="item.username"
       [headerSubText]="item.name + ' ' + item.surname"
+      [hideDescription]="true"
     >
-      <ng-container description>
+      <ng-container details>
         <p class="text-end">
           Registration Date: {{ item.registrationDate | date: "dd/MM/yyyy" }}
         </p>
-      </ng-container>
-
-      <ng-container details>
         <p>Total Sales Revenue: {{ item.totalSalesRevenue | currency }}</p>
       </ng-container>
 

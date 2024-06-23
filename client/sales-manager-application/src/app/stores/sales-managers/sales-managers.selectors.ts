@@ -23,6 +23,11 @@ export const selectSalesManagersError = createSelector(
   (state: SalesManagersState) => state.error,
 );
 
+export const selectRegistrationSuccess = createSelector(
+  selectSalesManagersFeature,
+  (state: SalesManagersState) => state.registrationSuccess,
+);
+
 export const selectSalesManagerById = (id: string) =>
   createSelector(selectSalesManagers, (salesManagers: SalesManager[]) =>
     salesManagers.find((m) => m.id === id),

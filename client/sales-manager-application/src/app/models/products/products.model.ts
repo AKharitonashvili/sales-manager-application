@@ -8,6 +8,7 @@ export interface Product extends ProductSkeleton {
   quantity?: number | null;
   id?: string | null;
   description?: string | null;
+  saleDate?: string | null;
 }
 
 export interface ProductForm {
@@ -20,6 +21,5 @@ export interface ProductForm {
 
 export interface SoldProduct extends ProductSkeleton {
   id?: string | null;
-  image?: string | null;
   saleDate?: string | null;
 }

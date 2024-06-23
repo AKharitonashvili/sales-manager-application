@@ -12,6 +12,7 @@ export interface SalesManagersState {
     error?: string;
     products?: SoldProduct[];
   };
+  registrationSuccess?: boolean | null;
 }
 
 export const initialState: SalesManagersState = {
@@ -66,14 +67,18 @@ export const salesManagerReducer = createReducer(
   // Add SalesManager
   on(
     salesManagersActions.addSalesManager,
-    (state): SalesManagersState => ({ ...state, loading: true }),
+    (state): SalesManagersState => ({
+      ...state,
+      loading: true,
+      registrationSuccess: null,
+    }),
   ),
   on(
     salesManagersActions.addSalesManagerSuccess,
-    (state, { salesManager }): SalesManagersState => ({
+    (state): SalesManagersState => ({
       ...state,
       loading: false,
-      salesManagers: [...state.salesManagers, salesManager],
+      registrationSuccess: true,
     }),
   ),
   on(
@@ -81,69 +86,8 @@ export const salesManagerReducer = createReducer(
     (state, { error }): SalesManagersState => ({
       ...state,
       loading: false,
+      registrationSuccess: false,
       error,
-    }),
-  ),
-
-  // Edit SalesManager
-  on(
-    salesManagersActions.editSalesManager,
-    (state): SalesManagersState => ({ ...state, loading: true }),
-  ),
-  on(
-    salesManagersActions.editSalesManagerSuccess,
-    (state, { salesManager }): SalesManagersState => {
-      const salesManagerMap = new Map<string, SalesManager>();
-      state.salesManagers.forEach((salesManager) =>
-        salesManagerMap.set(salesManager.id ?? '', salesManager),
-      );
-      console.log({ salesManagerMap, id: salesManager });
-      if (salesManagerMap.has(salesManager.id ?? '')) {
-        salesManagerMap.set(salesManager.id ?? '', salesManager);
-      }
-      console.log(Array.from(salesManagerMap.values()));
-      return {
-        ...state,
-        loading: false,
-        salesManagers: Array.from(salesManagerMap.values()),
-      };
-    },
-  ),
-  on(
-    salesManagersActions.editSalesManagerFailure,
-    (state, { error }): SalesManagersState => ({
-      ...state,
-      loading: false,
-      error,
-    }),
-  ),
-
-  // Sold by managers products
-  on(
-    salesManagersActions.loadSoldProductsByManager,
-    (state): SalesManagersState => ({
-      ...state,
-      productsSoldByManager: { ...state.productsSoldByManager, loading: true },
-    }),
-  ),
-  on(
-    salesManagersActions.loadSoldProductsByManagerSuccess,
-    (state, { products }): SalesManagersState => ({
-      ...state,
-      productsSoldByManager: {
-        loading: false,
-        products,
-      },
-    }),
-  ),
-  on(
-    salesManagersActions.loadSoldProductsByManagerFailure,
-    (state, { error }): SalesManagersState => ({
-      ...state,
-      productsSoldByManager: {
-        loading: false,
-        error,
-      },
     }),
   ),
 );

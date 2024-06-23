@@ -5,6 +5,7 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 import { salesManagersActions } from '.';
 import { salesManagersMock } from 'src/app/shared/mock/sales-managers.mock';
 import { productsSoldByProducts } from 'src/app/shared/mock/products.mock';
+import { SalesManagersService } from 'src/app/services/sales-managers/sales-managers.service';
 
 @Injectable()
 export class SalesManagersEffects {
@@ -12,7 +13,7 @@ export class SalesManagersEffects {
     return this.actions$.pipe(
       ofType(salesManagersActions.loadSalesManagers),
       switchMap(() =>
-        of(salesManagersMock).pipe(
+        this.salesManagerService.getSalesManagers().pipe(
           map((salesManagers) =>
             salesManagersActions.loadSalesManagersSuccess({ salesManagers }),
           ),
@@ -28,42 +29,12 @@ export class SalesManagersEffects {
     return this.actions$.pipe(
       ofType(salesManagersActions.addSalesManager),
       switchMap(({ salesManager }) =>
-        of(null).pipe(
+        this.salesManagerService.addSalesManager(salesManager).pipe(
           map(() =>
             salesManagersActions.addSalesManagerSuccess({ salesManager }),
           ),
           catchError((error) =>
             of(salesManagersActions.addSalesManagerFailure({ error })),
-          ),
-        ),
-      ),
-    );
-  });
-
-  editSalesManager$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(salesManagersActions.editSalesManager),
-      switchMap(({ salesManager }) =>
-        of(null).pipe(
-          map(() =>
-            salesManagersActions.editSalesManagerSuccess({ salesManager }),
-          ),
-          catchError((error) =>
-            of(salesManagersActions.editSalesManagerFailure({ error })),
-          ),
-        ),
-      ),
-    );
-  });
-
-  deleteSalesManager$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(salesManagersActions.deleteSalesManager),
-      switchMap(({ id }) =>
-        of(null).pipe(
-          map(() => salesManagersActions.deleteSalesManagerSuccess({ id })),
-          catchError((error) =>
-            of(salesManagersActions.deleteSalesManagerFailure({ error })),
           ),
         ),
       ),
@@ -88,5 +59,8 @@ export class SalesManagersEffects {
     );
   });
 
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private salesManagerService: SalesManagersService,
+  ) {}
 }

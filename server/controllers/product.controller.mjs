@@ -1,3 +1,4 @@
+import { Manager } from "../models/managers.model.mjs";
 import { Product } from "../models/product.model.mjs";
 
 export const getProducts = async (
@@ -62,7 +63,6 @@ export const updateProduct = async (
 ) => {
   try {
     const { id } = req.params;
-    console.log(id);
 
     const product =
       await Product.findByIdAndUpdate(
@@ -109,6 +109,80 @@ export const deleteProduct = async (
     res.status(200).json({
       message:
         "Product deleted successfully",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: error.message });
+  }
+};
+
+export const sellProduct = async (
+  req,
+  res
+) => {
+  try {
+    const { id } = req.params;
+    const { quantity, managerId } =
+      req.body;
+
+    let product =
+      await Product.findById(id);
+
+    let manager =
+      await Manager.findById(managerId);
+
+    if (
+      !product ||
+      product.quantity < quantity
+    ) {
+      return res.status(404).json({
+        message:
+          "Product not found in stock",
+      });
+    }
+
+    const newProduct = {
+      ...product.toObject(),
+      quantity:
+        product.quantity - quantity,
+    };
+
+    product =
+      await Product.findByIdAndUpdate(
+        id,
+        newProduct,
+        { new: true }
+      );
+
+    const products = manager.products;
+    for (let i = 0; i < quantity; i++) {
+      products.push({
+        ...product.toObject(),
+        saleDate: new Date(),
+      });
+    }
+    const totalSalesRevenue =
+      products.reduce(
+        (acc, curr) => acc + curr.price,
+        0
+      );
+    const newManager = {
+      ...manager.toObject(),
+      products,
+      totalSalesRevenue,
+    };
+
+    manager =
+      await Manager.findByIdAndUpdate(
+        managerId,
+        newManager,
+        { new: true }
+      );
+
+    res.status(200).json({
+      product,
+      manager,
     });
   } catch (error) {
     res

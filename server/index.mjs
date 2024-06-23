@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { productRouter } from "./routes/products.mjs";
+import { managerRouter } from "./routes/managers.mjs";
 
 const app = express();
 
@@ -29,6 +30,10 @@ app.use((req, res, next) => {
 
 // routes
 app.use("/api/products", productRouter);
+app.use(
+  "/api/sales-managers",
+  managerRouter
+);
 
 mongoose
   .connect(
