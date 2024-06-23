@@ -13,8 +13,4 @@ export class SalesManagersService {
   getSalesManagers(): Observable<SalesManager[]> {
     return this.http.get<SalesManager[]>(this.url);
   }
-
-  addSalesManager(manager: SalesManager): Observable<SalesManager[]> {
-    return this.http.post<SalesManager[]>(this.url, manager);
-  }
 }

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
 
 export const login = createAction(
   '[Auth] Login',
@@ -21,5 +22,20 @@ export const checkIfLoggedInSuccess = createAction(
 
 export const checkIfLoggedInFailure = createAction(
   '[Auth] Check If Logged In Failure',
+  props<{ error: string }>(),
+);
+
+export const addSalesManager = createAction(
+  '[Auth] Add SalesManager',
+  props<{ salesManager: SalesManager }>(),
+);
+
+export const addSalesManagerSuccess = createAction(
+  '[Auth] Add SalesManager Success',
+  props<{ salesManager: SalesManager }>(),
+);
+
+export const addSalesManagerFailure = createAction(
+  '[Auth] Add SalesManager Failure',
   props<{ error: string }>(),
 );

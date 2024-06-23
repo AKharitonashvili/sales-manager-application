@@ -2,8 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import { productRouter } from "./routes/products.mjs";
 import { managerRouter } from "./routes/managers.mjs";
+import { authRouter } from "./controllers/auth.mjs";
+import cookieParser from "cookie-parser";
 
 const app = express();
+app.use(cookieParser());
 
 // middleware
 app.use(express.json());
@@ -34,6 +37,7 @@ app.use(
   "/api/sales-managers",
   managerRouter
 );
+app.use("/api/auth", authRouter);
 
 mongoose
   .connect(

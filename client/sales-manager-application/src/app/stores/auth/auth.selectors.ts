@@ -19,3 +19,8 @@ export const selectAuthError = createSelector(
   selectAuthFeature,
   (state: AuthState) => state.error,
 );
+
+export const selectRegistrationSuccess = createSelector(
+  selectAuthFeature,
+  (state: AuthState) => state.registrationSuccess,
+);

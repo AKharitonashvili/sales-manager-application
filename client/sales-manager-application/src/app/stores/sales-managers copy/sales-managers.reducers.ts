@@ -12,6 +12,7 @@ export interface SalesManagersState {
     error?: string;
     products?: SoldProduct[];
   };
+  registrationSuccess?: boolean | null;
 }
 
 export const initialState: SalesManagersState = {
@@ -60,6 +61,32 @@ export const salesManagerReducer = createReducer(
     (state, { error }): SalesManagersState => ({
       ...state,
       loading: false,
+      error,
+    }),
+  ),
+  // Add SalesManager
+  on(
+    salesManagersActions.addSalesManager,
+    (state): SalesManagersState => ({
+      ...state,
+      loading: true,
+      registrationSuccess: null,
+    }),
+  ),
+  on(
+    salesManagersActions.addSalesManagerSuccess,
+    (state): SalesManagersState => ({
+      ...state,
+      loading: false,
+      registrationSuccess: true,
+    }),
+  ),
+  on(
+    salesManagersActions.addSalesManagerFailure,
+    (state, { error }): SalesManagersState => ({
+      ...state,
+      loading: false,
+      registrationSuccess: false,
       error,
     }),
   ),

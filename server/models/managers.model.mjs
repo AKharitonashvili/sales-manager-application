@@ -42,6 +42,9 @@ const ManagerSchema = mongoose.Schema({
     ],
   },
   products: [ProductSchema],
+  refreshToken: {
+    type: String,
+  },
 });
 
 export const Manager = mongoose.model(

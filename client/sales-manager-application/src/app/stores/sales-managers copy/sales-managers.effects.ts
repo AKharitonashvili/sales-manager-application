@@ -26,6 +26,22 @@ export class SalesManagersEffects {
     );
   });
 
+  addSalesManager$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(salesManagersActions.addSalesManager),
+      switchMap(({ salesManager }) =>
+        this.authService.addSalesManager(salesManager).pipe(
+          map(() =>
+            salesManagersActions.addSalesManagerSuccess({ salesManager }),
+          ),
+          catchError((error) =>
+            of(salesManagersActions.addSalesManagerFailure({ error })),
+          ),
+        ),
+      ),
+    );
+  });
+
   getSoldProductsByMaanager$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(salesManagersActions.loadSoldProductsByManager),

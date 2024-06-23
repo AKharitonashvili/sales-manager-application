@@ -15,7 +15,8 @@ import {
   salesManagersActions,
   salesManagersSelectors,
 } from 'src/app/stores/sales-managers';
-import { Observable, combineLatest, take } from 'rxjs';
+import { Observable, combineLatest, filter, take } from 'rxjs';
+import { AuthActions, AuthSelectors } from 'src/app/stores/auth';
 
 @Component({
   selector: 'app-manager-registration',
@@ -54,13 +55,16 @@ export class ManagerRegistrationComponent {
 
   handleRegister() {
     this.store.dispatch(
-      salesManagersActions.addSalesManager({
+      AuthActions.addSalesManager({
         salesManager: this.formGroup.value,
       }),
     );
     this.store
-      .select(salesManagersSelectors.selectRegistrationSuccess)
-      .pipe(take(1))
+      .select(AuthSelectors.selectRegistrationSuccess)
+      .pipe(
+        filter((v) => v !== null),
+        take(1),
+      )
       .subscribe(() => {
         this.router.navigateByUrl('home/sales-managers');
       });
