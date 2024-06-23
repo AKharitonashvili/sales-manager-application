@@ -16,6 +16,7 @@ import { ProductsEffects } from './app/stores/products/products.effects';
 import { SALES_MANAGERS_FEATURE_KEY } from './app/stores/sales-managers/sales-managers.selectors';
 import { salesManagerReducer } from './app/stores/sales-managers/sales-managers.reducers';
 import { SalesManagersEffects } from './app/stores/sales-managers/sales-managers.effects';
+import { provideHttpClient } from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -34,5 +35,6 @@ bootstrapApplication(AppComponent, {
       reducer: salesManagerReducer,
     }),
     provideEffects([SalesManagersEffects]),
+    provideHttpClient(),
   ],
 }).catch((err) => console.error(err));

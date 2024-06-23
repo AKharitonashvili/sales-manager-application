@@ -11,13 +11,28 @@ app.use(
     extended: false,
   })
 );
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "*"
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,OPTIONS,POST,PUT,DELETE"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
 
 // routes
 app.use("/api/products", productRouter);
 
 mongoose
   .connect(
-    "mongodb+srv://sandroxari:10eSX3MJaZdKSiI8@cluster0.5sh3jlu.mongodb.net/Node-API?retryWrites=true&w=majority&appName=Cluster0"
+    "mongodb+srv://sandroxari:10eSX3MJaZdKSiI8@cluster0.5sh3jlu.mongodb.net/Node-API?retryWrites=true&w=majority"
   )
   .then(() => {
     console.log(

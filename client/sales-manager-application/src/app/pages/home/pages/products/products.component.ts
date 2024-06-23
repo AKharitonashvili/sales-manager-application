@@ -37,6 +37,7 @@ import {
 import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
 import { PageLayoutComponent } from 'src/app/shared/ui/layouts/page-layout/page-layout.component';
 import { CardComponent } from 'src/app/shared/ui/cards/card/card.component';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-products',
@@ -50,6 +51,7 @@ import { CardComponent } from 'src/app/shared/ui/cards/card/card.component';
     PageLayoutComponent,
     ReactiveFormsModule,
     CardComponent,
+    MatCardModule,
   ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],

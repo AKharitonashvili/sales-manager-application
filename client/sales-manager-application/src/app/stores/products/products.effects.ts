@@ -5,6 +5,7 @@ import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { ProductsActions } from '.';
 import { Router } from '@angular/router';
 import { productsMock } from '../../shared/mock/products.mock';
+import { ProductsService } from 'src/app/services/products/products.service';
 
 @Injectable()
 export class ProductsEffects {
@@ -12,7 +13,7 @@ export class ProductsEffects {
     return this.actions$.pipe(
       ofType(ProductsActions.loadProducts),
       switchMap(() =>
-        of(productsMock).pipe(
+        this.productsService.getProducts().pipe(
           map((products) => ProductsActions.loadProductsSuccess({ products })),
           catchError((error) =>
             of(ProductsActions.loadProductsFailure({ error })),
@@ -26,7 +27,7 @@ export class ProductsEffects {
     return this.actions$.pipe(
       ofType(ProductsActions.addProduct),
       switchMap(({ product }) =>
-        of(null).pipe(
+        this.productsService.addProduct(product).pipe(
           map(() => ProductsActions.addProductSuccess({ product })),
           catchError((error) =>
             of(ProductsActions.addProductFailure({ error })),
@@ -40,7 +41,7 @@ export class ProductsEffects {
     return this.actions$.pipe(
       ofType(ProductsActions.editProduct),
       switchMap(({ product }) =>
-        of(null).pipe(
+        this.productsService.editProduct(product).pipe(
           map(() => ProductsActions.editProductSuccess({ product })),
           catchError((error) =>
             of(ProductsActions.editProductFailure({ error })),
@@ -54,7 +55,7 @@ export class ProductsEffects {
     return this.actions$.pipe(
       ofType(ProductsActions.deleteProduct),
       switchMap(({ id }) =>
-        of(null).pipe(
+        this.productsService.deleteProduct(id).pipe(
           map(() => ProductsActions.deleteProductSuccess({ id })),
           catchError((error) =>
             of(ProductsActions.deleteProductFailure({ error })),
@@ -64,5 +65,8 @@ export class ProductsEffects {
     );
   });
 
-  constructor(private actions$: Actions) {}
+  constructor(
+    private actions$: Actions,
+    private productsService: ProductsService,
+  ) {}
 }
