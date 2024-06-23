@@ -1,12 +1,13 @@
-<section class="my-10 flex flex-col items-center justify-center">
-  <form
-    [formGroup]="formGroup"
-    class="flex w-full max-w-sm flex-col gap-6 border border-black px-4 py-6"
-  >
-    <section class="flex justify-center">
-      <h1 class="text-3xl font-bold">Login</h1>
-    </section>
+<app-login-and-register-layout
+  [buttonDisabled]="formGroup.invalid"
+  [formGroup]="formGroup"
+  (handleClick)="handleLogin()"
+>
+  <section class="flex justify-center">
+    <h1 class="text-3xl font-bold">Login</h1>
+  </section>
 
+  <ng-container [formGroup]="formGroup">
     <mat-form-field>
       <mat-label>Username</mat-label>
       <input matInput formControlName="username" />
@@ -28,12 +29,5 @@
         Password minimal Length is 8
       </mat-error>
     </mat-form-field>
-
-    <app-button
-      text="Login"
-      [disabled]="formGroup.invalid"
-      customClasses="w-full"
-      (onClick)="handleLogin()"
-    ></app-button>
-  </form>
-</section>
+  </ng-container>
+</app-login-and-register-layout>

@@ -1,5 +1,5 @@
 <app-page-layout
-  (openAddDialog)="openAddSalesManagerDialog()"
+  (handleAddOrEditButton)="registerNewManager()"
   [openAddDialogButtonText]="'Add Sales Manager'"
   *ngIf="vm$ | async as vm"
 >
@@ -9,85 +9,91 @@
       class="grid flex-1 grid-cols-1 gap-4 md:grid-cols-3"
       [formGroup]="filterForm"
     >
-      <mat-form-field>
-        <mat-label>Filter by username</mat-label>
-        <input
-          class="border border-primary"
-          type="text"
-          matInput
-          [formControl]="filterForm.controls.username"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Filter by name</mat-label>
-        <input
-          class="border border-primary"
-          type="text"
-          matInput
-          [formControl]="filterForm.controls.name"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Filter by surname</mat-label>
-        <input
-          class="border border-primary"
-          type="text"
-          matInput
-          [formControl]="filterForm.controls.surname"
-        />
-      </mat-form-field>
+      <section class="flex flex-col gap-4">
+        <mat-form-field>
+          <mat-label>Filter by username</mat-label>
+          <input
+            class="border border-primary"
+            type="text"
+            matInput
+            [formControl]="filterForm.controls.username"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Filter by name</mat-label>
+          <input
+            class="border border-primary"
+            type="text"
+            matInput
+            [formControl]="filterForm.controls.name"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Filter by surname</mat-label>
+          <input
+            class="border border-primary"
+            type="text"
+            matInput
+            [formControl]="filterForm.controls.surname"
+          />
+        </mat-form-field>
+      </section>
 
-      <mat-form-field (click)="pickerStart.open()">
-        <mat-label>Filter by registration date start</mat-label>
-        <input
-          matInput
-          [matDatepicker]="pickerStart"
-          readonly
-          [formControl]="filterForm.controls.registrationDateStart"
-          placeholder="MM/DD/YYYY"
-        />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="pickerStart"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #pickerStart></mat-datepicker>
-      </mat-form-field>
+      <section class="flex flex-col gap-4">
+        <mat-form-field (click)="pickerStart.open()">
+          <mat-label>Filter by registration date start</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerStart"
+            readonly
+            [formControl]="filterForm.controls.registrationDateStart"
+            placeholder="MM/DD/YYYY"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickerStart"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+        </mat-form-field>
 
-      <mat-form-field (click)="pickerEnd.open()">
-        <mat-label>Filter by registration date end</mat-label>
-        <input
-          matInput
-          [matDatepicker]="pickerEnd"
-          readonly
-          [formControl]="filterForm.controls.registrationDateEnd"
-          placeholder="MM/DD/YYYY"
-        />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="pickerEnd"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #pickerEnd></mat-datepicker>
-      </mat-form-field>
+        <mat-form-field (click)="pickerEnd.open()">
+          <mat-label>Filter by registration date end</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerEnd"
+            readonly
+            [formControl]="filterForm.controls.registrationDateEnd"
+            placeholder="MM/DD/YYYY"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickerEnd"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field>
+      </section>
 
-      <mat-form-field>
-        <mat-label>Filter Total Revenue Min</mat-label>
-        <input
-          class="border border-primary"
-          type="text"
-          matInput
-          [formControl]="filterForm.controls.totalSalesRevenueFrom"
-        />
-      </mat-form-field>
+      <section class="flex flex-col gap-4">
+        <mat-form-field>
+          <mat-label>Filter Total Revenue Min</mat-label>
+          <input
+            class="border border-primary"
+            type="number"
+            matInput
+            [formControl]="filterForm.controls.totalSalesRevenueFrom"
+          />
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Filter Total Revenue Max</mat-label>
-        <input
-          class="border border-primary"
-          type="text"
-          matInput
-          [formControl]="filterForm.controls.totalSalesRevenueTo"
-        />
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Filter Total Revenue Max</mat-label>
+          <input
+            class="border border-primary"
+            type="number"
+            matInput
+            [formControl]="filterForm.controls.totalSalesRevenueTo"
+          />
+        </mat-form-field>
+      </section>
     </form>
   </ng-container>
 
@@ -97,6 +103,12 @@
       [headerText]="item.username"
       [headerSubText]="item.name + ' ' + item.surname"
     >
+      <ng-container description>
+        <p class="text-end">
+          Registration Date: {{ item.registrationDate | date: "dd/MM/yyyy" }}
+        </p>
+      </ng-container>
+
       <ng-container details>
         <p>Total Sales Revenue: {{ item.totalSalesRevenue | currency }}</p>
       </ng-container>

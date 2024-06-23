@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import { AuthActions } from '../../../app/stores/auth';
 import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
+import { LoginAndRegisterLayoutComponent } from 'src/app/shared/ui/layouts/login-and-register-layout/login-and-register-layout.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,6 +24,7 @@ import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.compone
     ReactiveFormsModule,
     CommonModule,
     ButtonComponent,
+    LoginAndRegisterLayoutComponent,
   ],
 })
 export class LoginComponent {

@@ -7,14 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import {
-  Observable,
-  combineLatest,
-  tap,
-  switchMap,
-  map,
-  startWith,
-} from 'rxjs';
+import { Observable, combineLatest, map, startWith, debounceTime } from 'rxjs';
 import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
 import { Store } from '@ngrx/store';
 import {
@@ -23,6 +16,7 @@ import {
 } from 'src/app/stores/sales-managers';
 import { CardComponent } from 'src/app/shared/ui/cards/card/card.component';
 import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sales-managers',
@@ -63,6 +57,18 @@ export class SalesManagersComponent {
     totalSalesRevenueTo: new FormControl<string | null>(null),
   });
 
+  managerForm: FormGroup<
+    ToFormGroup<{
+      username: string | null;
+      surname: string | null;
+      name: string | null;
+    }>
+  > = new FormGroup({
+    username: new FormControl<string | null>(null),
+    surname: new FormControl<string | null>(null),
+    name: new FormControl<string | null>(null),
+  });
+
   vm$: Observable<{ salesManagers: SalesManager[] }> = combineLatest([
     this.store.select(salesManagersSelectors.selectSalesManagers),
     this.filterForm.valueChanges.pipe(
@@ -75,45 +81,91 @@ export class SalesManagersComponent {
         totalSalesRevenueTo: null,
         username: null,
       }),
+      debounceTime(300),
     ),
   ]).pipe(
     map(([salesManagers, filters]) => {
-      const filtersMap = new Map(
+      const filtersMap = new Map<string, any>(
         Object.entries(filters).filter(([key, value]) => value != null),
       );
+
+      const filterByString = (
+        salesManagers: SalesManager[],
+        key: string,
+        value: string,
+      ): SalesManager[] =>
+        salesManagers.filter((salesManager) =>
+          salesManager[key as keyof SalesManager]
+            ?.toString()
+            .toLocaleLowerCase()
+            .includes(value.toLocaleLowerCase()),
+        );
+
+      const filterByDate = (
+        salesManagers: SalesManager[],
+        key: string,
+        value: string,
+      ): SalesManager[] => {
+        const date = new Date(value);
+        return salesManagers.filter((salesManager) => {
+          if (salesManager.registrationDate) {
+            const registrationDate = new Date(salesManager.registrationDate);
+            return key === 'registrationDateStart'
+              ? registrationDate > date
+              : registrationDate < date;
+          }
+          return false;
+        });
+      };
+
+      const filterByRevenue = (
+        salesManagers: SalesManager[],
+        key: string,
+        value: string,
+      ): SalesManager[] => {
+        const revenueFilter = parseFloat(value);
+        return salesManagers.filter((salesManager) => {
+          if (salesManager.totalSalesRevenue) {
+            return key === 'totalSalesRevenueFrom'
+              ? salesManager.totalSalesRevenue > revenueFilter
+              : salesManager.totalSalesRevenue < revenueFilter;
+          }
+          return false;
+        });
+      };
 
       filtersMap.forEach((value, key) => {
         switch (key) {
           case 'username':
           case 'name':
           case 'surname':
-            {
-              salesManagers = salesManagers.filter((salesManager) =>
-                salesManager[key]
-                  ?.toLocaleLowerCase()
-                  .includes(filtersMap.get(key)!.toLocaleLowerCase()),
-              );
-            }
+            salesManagers = filterByString(salesManagers, key, value);
             break;
-          case 'registrationDateStart': {
-            salesManagers = salesManagers.filter(
-              (salesManager) =>
-                salesManager.registrationDate ??
-                '' > filtersMap.get(key)!.toLocaleLowerCase(),
-            );
-          }
+          case 'registrationDateStart':
+          case 'registrationDateEnd':
+            salesManagers = filterByDate(salesManagers, key, value);
+            break;
+          case 'totalSalesRevenueFrom':
+          case 'totalSalesRevenueTo':
+            salesManagers = filterByRevenue(salesManagers, key, value);
+            break;
+          default:
+            break;
         }
       });
 
-      return {
-        salesManagers,
-      };
+      return { salesManagers };
     }),
   );
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     this.store.dispatch(salesManagersActions.loadSalesManagers());
   }
 
-  openAddSalesManagerDialog(salesManager?: SalesManager) {}
+  registerNewManager() {
+    this.router.navigateByUrl('home/sales-managers/register');
+  }
 }

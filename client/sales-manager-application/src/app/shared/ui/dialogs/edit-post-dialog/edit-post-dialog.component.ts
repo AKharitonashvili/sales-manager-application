@@ -14,6 +14,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { LatinLettersOnlyDirective } from 'src/app/shared/directives/latin-letters-only/latin-letters-only.directive';
 import { SelectOnFocusDirective } from 'src/app/shared/directives/select-on-focus/select-on-focus.directive';
 import { ButtonComponent } from '../../buttons/button/button.component';
+import { DialogLayoutComponent } from '../../layouts/dialog-layout/dialog-layout.component';
 
 @Component({
   selector: 'app-edit-post-dialog',
@@ -29,6 +30,7 @@ import { ButtonComponent } from '../../buttons/button/button.component';
     LatinLettersOnlyDirective,
     SelectOnFocusDirective,
     ButtonComponent,
+    DialogLayoutComponent,
   ],
   templateUrl: './edit-post-dialog.component.html',
   styleUrls: ['./edit-post-dialog.component.scss'],

@@ -32,5 +32,5 @@ export class PageLayoutComponent {
   @Input() filterInputLabel!: string;
   @Input() openAddDialogButtonText!: string;
 
-  @Output() openAddDialog = new EventEmitter();
+  @Output() handleAddOrEditButton = new EventEmitter();
 }

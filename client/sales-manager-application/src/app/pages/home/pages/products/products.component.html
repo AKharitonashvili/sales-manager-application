@@ -2,7 +2,7 @@
   *ngIf="vm$ | async as vm"
   [filterInputLabel]="'Filter Products by Name'"
   [openAddDialogButtonText]="'Add Product'"
-  (openAddDialog)="openEditProductDialog()"
+  (handleAddOrEditButton)="openEditProductDialog()"
 >
   <ng-container filter>
     <form

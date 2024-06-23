@@ -1,7 +1,4 @@
-<section class="flex flex-col gap-4 p-4">
-  <section class="flex items-center justify-end">
-    <button (click)="close()"><mat-icon>close</mat-icon></button>
-  </section>
+<app-dialog-layout (close)="close()">
   <form *ngIf="data.form as form" [formGroup]="form">
     <mat-form-field class="mb-4">
       <mat-label>Name Of Product</mat-label>
@@ -74,4 +71,4 @@
       <app-button [text]="'Submit'" (onClick)="close(true)"></app-button>
     </section>
   </form>
-</section>
+</app-dialog-layout>

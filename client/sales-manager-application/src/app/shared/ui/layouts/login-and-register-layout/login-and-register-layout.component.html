@@ -1,0 +1,16 @@
+<section class="my-10 flex flex-col items-center justify-center">
+  <ng-container *ngIf="formGroup">
+    <form
+      [formGroup]="formGroup"
+      class="flex w-full max-w-sm flex-col gap-6 border border-black px-4 py-6"
+    >
+      <ng-content />
+      <app-button
+        text="Login"
+        [disabled]="buttonDisabled"
+        customClasses="w-full"
+        (onClick)="handleClick.emit()"
+      ></app-button>
+    </form>
+  </ng-container>
+</section>

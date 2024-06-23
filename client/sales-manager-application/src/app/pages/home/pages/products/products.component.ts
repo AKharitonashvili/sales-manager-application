@@ -161,7 +161,6 @@ export class ProductsComponent {
   }
 
   handlePageEvent(e: PageEvent) {
-    console.log(e);
     const { pageSize, pageIndex } = e;
     this.paginationSubject$.next({ pageIndex, pageSize });
   }
