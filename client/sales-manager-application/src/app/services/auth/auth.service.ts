@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
 
 @Injectable({
@@ -47,5 +47,10 @@ export class AuthService {
           }
         }),
       );
+  }
+
+  isLoggedIn(): Observable<string | null> {
+    const token = localStorage.getItem('accessToken');
+    return of(token);
   }
 }

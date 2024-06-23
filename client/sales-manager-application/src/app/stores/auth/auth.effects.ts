@@ -26,11 +26,8 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.checkIfLoggedIn),
       switchMap(() =>
-        of(false).pipe(
-          map((isLoggedIn) =>
-            AuthActions.checkIfLoggedInSuccess({ isLoggedIn }),
-          ),
-          tap(() => this.router.navigateByUrl('/home')),
+        this.authService.isLoggedIn().pipe(
+          map(() => AuthActions.checkIfLoggedInSuccess({ isLoggedIn: true })),
           catchError((error) =>
             of(AuthActions.checkIfLoggedInFailure({ error })),
           ),
