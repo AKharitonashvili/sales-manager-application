@@ -1,17 +1,26 @@
-export interface Product {
+interface ProductSkeleton {
   name?: string | null;
   price?: number | null;
+  category?: string | null;
+}
+
+export interface Product extends ProductSkeleton {
   quantity?: number | null;
   id?: string | null;
   image?: string | null;
-  category?: string | null;
   description?: string | null;
 }
 
 export interface ProductForm {
+  quantity: number | null;
+  description: string | null;
   name: string | null;
   price: number | null;
-  quantity: number | null;
   category: string | null;
-  description: string | null;
+}
+
+export interface SoldProduct extends ProductSkeleton {
+  id?: string | null;
+  image?: string | null;
+  saleDate?: string | null;
 }

@@ -1,0 +1,40 @@
+<section *ngIf="vm$ | async as vm" class="p-4">
+  <app-details-card
+    *ngIf="vm.manager as manager"
+    [header]="manager.username"
+    [subText]="manager.name + ' ' + manager.surname"
+  >
+    <ng-container items>
+      <section class="flex flex-col gap-4">
+        <section class="flex justify-between">
+          <h1 class="font-bold">Products Sold:</h1>
+          <p>
+            Total sales revenue:
+            <span class="font-semibold text-red-500">
+              {{ manager.totalSalesRevenue | currency }}
+            </span>
+          </p>
+        </section>
+        <section class="grid grid-cols-3 gap-4">
+          <app-card
+            *ngFor="let item of vm.products"
+            [headerText]="item.name"
+            [headerSubText]="item.category"
+          >
+            <ng-container details>
+              <p>
+                Income:
+                <span class="font-semibold text-red-500">
+                  {{ item.price | currency }}
+                </span>
+              </p>
+              <p class="text-gray-500">
+                Sale date: {{ item.saleDate | date: "dd/MM/yyyy HH:mm" }}
+              </p>
+            </ng-container>
+          </app-card>
+        </section>
+      </section>
+    </ng-container>
+  </app-details-card>
+</section>

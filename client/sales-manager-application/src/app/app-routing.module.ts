@@ -31,6 +31,13 @@ const routes: Routes = [
             './pages/home/pages/sales-managers//manager-registration/manager-registration.component'
           ).then((x) => x.ManagerRegistrationComponent),
       },
+      {
+        path: 'sales-managers/:id',
+        loadComponent: () =>
+          import(
+            './pages/home/pages/sales-managers/manager-details/manager-details.component'
+          ).then((x) => x.ManagerDetailsComponent),
+      },
     ],
   },
   {

@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { salesManagersActions } from '.';
 import { salesManagersMock } from 'src/app/shared/mock/sales-managers.mock';
+import { productsSoldByProducts } from 'src/app/shared/mock/products.mock';
 
 @Injectable()
 export class SalesManagersEffects {
@@ -63,6 +64,24 @@ export class SalesManagersEffects {
           map(() => salesManagersActions.deleteSalesManagerSuccess({ id })),
           catchError((error) =>
             of(salesManagersActions.deleteSalesManagerFailure({ error })),
+          ),
+        ),
+      ),
+    );
+  });
+
+  getSoldProductsByMaanager$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(salesManagersActions.loadSoldProductsByManager),
+      switchMap(() =>
+        of(productsSoldByProducts).pipe(
+          map((products) =>
+            salesManagersActions.loadSoldProductsByManagerSuccess({ products }),
+          ),
+          catchError((error) =>
+            of(
+              salesManagersActions.loadSoldProductsByManagerFailure({ error }),
+            ),
           ),
         ),
       ),

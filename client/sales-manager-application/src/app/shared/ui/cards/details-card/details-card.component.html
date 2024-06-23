@@ -1,0 +1,16 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ header }}</mat-card-title>
+    <mat-card-subtitle>{{ subText }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <ng-content select="[items]"></ng-content>
+  </mat-card-content>
+
+  <mat-card-actions class="w-full">
+    <section class="flex w-full justify-end gap-4">
+      <ng-content select="[buttons]" />
+    </section>
+  </mat-card-actions>
+</mat-card>

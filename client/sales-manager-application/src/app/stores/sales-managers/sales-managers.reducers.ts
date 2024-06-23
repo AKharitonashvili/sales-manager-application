@@ -1,16 +1,23 @@
 import { createReducer, on } from '@ngrx/store';
 import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
 import { salesManagersActions } from '.';
+import { Product, SoldProduct } from 'src/app/models/products/products.model';
 
 export interface SalesManagersState {
   loading: boolean;
   error?: string;
   salesManagers: SalesManager[];
+  productsSoldByManager: {
+    loading: boolean;
+    error?: string;
+    products?: SoldProduct[];
+  };
 }
 
 export const initialState: SalesManagersState = {
   loading: false,
   salesManagers: [],
+  productsSoldByManager: { loading: false },
 };
 
 export const salesManagerReducer = createReducer(
@@ -108,6 +115,35 @@ export const salesManagerReducer = createReducer(
       ...state,
       loading: false,
       error,
+    }),
+  ),
+
+  // Sold by managers products
+  on(
+    salesManagersActions.loadSoldProductsByManager,
+    (state): SalesManagersState => ({
+      ...state,
+      productsSoldByManager: { ...state.productsSoldByManager, loading: true },
+    }),
+  ),
+  on(
+    salesManagersActions.loadSoldProductsByManagerSuccess,
+    (state, { products }): SalesManagersState => ({
+      ...state,
+      productsSoldByManager: {
+        loading: false,
+        products,
+      },
+    }),
+  ),
+  on(
+    salesManagersActions.loadSoldProductsByManagerFailure,
+    (state, { error }): SalesManagersState => ({
+      ...state,
+      productsSoldByManager: {
+        loading: false,
+        error,
+      },
     }),
   ),
 );

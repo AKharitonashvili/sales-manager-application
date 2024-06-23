@@ -114,7 +114,10 @@
       </ng-container>
 
       <ng-container buttons>
-        <app-button text="Details" />
+        <app-button
+          text="Details"
+          (click)="navigateToManagerDetails(item.id ?? '')"
+        />
       </ng-container>
     </app-card>
   </ng-container>

@@ -168,4 +168,8 @@ export class SalesManagersComponent {
   registerNewManager() {
     this.router.navigateByUrl('home/sales-managers/register');
   }
+
+  navigateToManagerDetails(id: string) {
+    this.router.navigate(['home', 'sales-managers', id]);
+  }
 }

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Product, SoldProduct } from 'src/app/models/products/products.model';
 import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
 
 export const loadSalesManagers = createAction(
@@ -57,5 +58,20 @@ export const deleteSalesManagerSuccess = createAction(
 
 export const deleteSalesManagerFailure = createAction(
   '[SalesManagers] Delete SalesManager Failure',
+  props<{ error: string }>(),
+);
+
+export const loadSoldProductsByManager = createAction(
+  '[SalesManagers] Load Sold Products By Manager',
+  props<{ id: string }>(),
+);
+
+export const loadSoldProductsByManagerSuccess = createAction(
+  '[SalesManagers] Load Sold Products By Manager Success',
+  props<{ products: SoldProduct[] }>(),
+);
+
+export const loadSoldProductsByManagerFailure = createAction(
+  '[SalesManagers] Load Sold Products By Manager Failure',
   props<{ error: string }>(),
 );

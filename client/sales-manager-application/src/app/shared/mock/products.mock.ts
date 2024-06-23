@@ -1,4 +1,4 @@
-import { Product } from '../../models/products/products.model';
+import { Product, SoldProduct } from '../../models/products/products.model';
 
 export const productsMock: Product[] = [
   {
@@ -900,5 +900,78 @@ export const productsMock: Product[] = [
     id: '99',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  },
+];
+
+export const productsSoldByProducts: SoldProduct[] = [
+  {
+    name: 'Cool T-Shirt',
+    price: 19.99,
+    category: 'Clothing',
+    id: '1',
+    saleDate: 'Sun Sep 25 2022 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Stylish Jeans',
+    price: 49.99,
+    category: 'Clothing',
+    id: '2',
+    saleDate: 'Mon Oct 03 2022 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Running Shoes',
+    price: 79.99,
+    category: 'Footwear',
+    id: '3',
+    saleDate: 'Tue Nov 15 2022 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Casual Hat',
+    price: 15.99,
+    category: 'Accessories',
+    id: '4',
+    saleDate: 'Wed Dec 07 2022 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Formal Shirt',
+    price: 29.99,
+    category: 'Clothing',
+    id: '5',
+    saleDate: 'Thu Jan 12 2023 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Leather Belt',
+    price: 25.99,
+    category: 'Accessories',
+    id: '6',
+    saleDate: 'Fri Feb 17 2023 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Sports Jacket',
+    price: 99.99,
+    category: 'Clothing',
+    id: '7',
+    saleDate: 'Sat Mar 25 2023 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Sunglasses',
+    price: 19.99,
+    category: 'Accessories',
+    id: '8',
+    saleDate: 'Sun Apr 30 2023 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Winter Coat',
+    price: 149.99,
+    category: 'Clothing',
+    id: '9',
+    saleDate: 'Mon May 29 2023 00:00:00 GMT+0400',
+  },
+  {
+    name: 'Sneakers',
+    price: 59.99,
+    category: 'Footwear',
+    id: '10',
+    saleDate: 'Tue Jun 20 2023 00:00:00 GMT+0400',
   },
 ];
