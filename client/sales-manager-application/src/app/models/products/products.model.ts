@@ -7,7 +7,6 @@ interface ProductSkeleton {
 export interface Product extends ProductSkeleton {
   quantity?: number | null;
   id?: string | null;
-  image?: string | null;
   description?: string | null;
 }
 
