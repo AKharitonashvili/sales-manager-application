@@ -5,7 +5,7 @@ import { TotalPricePipe } from './total-price.pipe';
 
 describe('Pipe: TotalPricee', () => {
   it('create an instance', () => {
-    let pipe = new TotalPricePipe();
+    const pipe = new TotalPricePipe();
     expect(pipe).toBeTruthy();
   });
 });

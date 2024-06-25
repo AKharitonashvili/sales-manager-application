@@ -20,7 +20,11 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
 import {
   ProductForm,
   Product,
@@ -50,6 +54,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatCardModule,
     TranslateModule,
   ],
+  providers: [MatPaginatorIntl],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

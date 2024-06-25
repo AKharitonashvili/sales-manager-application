@@ -1,1 +1,29 @@
-<router-outlet />
+<section class="flex h-full flex-col justify-between">
+  <section>
+    <router-outlet />
+  </section>
+  <footer
+    class="flex flex-col gap-4 rounded-none border-t border-solid border-secondary pb-20 pt-5"
+  >
+    <section class="flex justify-end gap-4 p-4">
+      <mat-icon>
+        <span class="material-symbols-outlined"> public </span>
+      </mat-icon>
+      <button
+        [disabled]="currentLanguage === 'en-US'"
+        (click)="handleLanguageChange('en-US')"
+      >
+        English
+      </button>
+      <button
+        [disabled]="currentLanguage === 'ge-KA'"
+        (click)="handleLanguageChange('ge-KA')"
+      >
+        ქართული
+      </button>
+    </section>
+    <section class="flex justify-center">
+      {{ "common.copyright" | translate }}
+    </section>
+  </footer>
+</section>

@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() disabled: boolean = false;
+  @Input() disabled = false;
   @Input() text!: string;
   @Input() customClasses!: string;
   @Output() onClick = new EventEmitter();

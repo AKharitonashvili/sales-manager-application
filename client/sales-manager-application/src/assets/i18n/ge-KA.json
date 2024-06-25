@@ -13,7 +13,7 @@
 
   "common.sales_managers.add_sales_manager": "გაყიდვების მენეჯერის დამატება",
   "common.sales_managers.filter_by_username": "გაფილტვრა მომხმარებლის სახელით",
-  "common.sales_managers.Filter_by_name": "გაფილტვრა სახელით",
+  "common.sales_managers.filter_by_name": "გაფილტვრა სახელით",
   "common.sales_managers.filter_by_surname": "გაფილტვრა გვარით",
   "common.sales_managers.filter_by_registration_start": "გაფილტვრა რეგისტრაციის თარიღის დასაწყისით",
   "common.sales_managers.filter_by_registration_end": "გაფილტვრა რეგისტრაციის თარიღის დასასრულით",
@@ -34,5 +34,11 @@
   "common.authorization.required": "სავალდებულოა",
   "common.authorization.minimal_length": "მინიმალური სიგრძე",
   "common.authorization.register": "რეგისტრაცია",
-  "common.authorization.manager_registration": "მენეჯერის რეგისტრაცია"
+  "common.authorization.manager_registration": "მენეჯერის რეგისტრაცია",
+
+  "common.copyright": "© 2024 John Doe ყველა უფლება დაცულია",
+
+  "common.layout.filters": "ფილტრები",
+
+  "common.pagination.items_per_page": "რაოდენობა გვერდის მიხედვით:"
 }

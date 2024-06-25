@@ -11,6 +11,7 @@ import { ButtonComponent } from '../../buttons/button/button.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-page-layout',
@@ -22,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatInputModule,
+    TranslateModule,
   ],
   templateUrl: './page-layout.component.html',
   styleUrls: ['./page-layout.component.scss'],

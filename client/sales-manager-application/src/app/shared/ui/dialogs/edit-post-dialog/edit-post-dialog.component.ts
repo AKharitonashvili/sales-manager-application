@@ -49,7 +49,7 @@ export class EditPostDialogComponent {
     return value === 100 ? '99+' : `${value}`;
   }
 
-  close(success: boolean = false) {
+  close(success = false) {
     this.dialogRef.close({ success });
   }
 }

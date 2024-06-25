@@ -1,5 +1,36 @@
 <app-dialog-layout (close)="close()">
   <form *ngIf="data.form as form" [formGroup]="form">
+    <mat-form-field class="mb-4">
+      <mat-label>Name Of Product</mat-label>
+      <input matInput formControlName="name" latinLettersOnly />
+      <mat-hint>Input restricted to Latin letters only.</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Price Of Product</mat-label>
+      <input
+        placeholder="Price in $ currency"
+        matInput
+        formControlName="price"
+        type="number"
+        selectOnFocus
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Select an Categiry option</mat-label>
+      <mat-select
+        disableRipple
+        formControlName="category"
+        placeholder="Select Category"
+        [value]="form.controls.category?.value"
+      >
+        <mat-option *ngFor="let item of categories" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <section class="flex flex-col items-end justify-center">
       <section class="flex justify-end">
         <p class="font-bold">{{ form.controls.quantity?.value ?? 0 }}</p>
