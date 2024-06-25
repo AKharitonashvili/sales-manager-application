@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import { productRouter } from "./routes/products.mjs";
 import { managerRouter } from "./routes/managers.mjs";
-import { authRouter } from "./controllers/auth.mjs";
 import cookieParser from "cookie-parser";
+import authRouter from "./routes/auth.mjs";
 
 const app = express();
 app.use(cookieParser());
