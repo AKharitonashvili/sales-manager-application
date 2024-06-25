@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/guards/auth/auth.guard';
+import { SalesManagerResolver } from './shared/resolvers/sales-managers.resolver';
 
 const routes: Routes = [
   {
@@ -37,6 +38,9 @@ const routes: Routes = [
           import(
             './pages/home/pages/sales-managers/manager-details/manager-details.component'
           ).then((x) => x.ManagerDetailsComponent),
+        resolve: {
+          salesManagers: SalesManagerResolver,
+        },
       },
     ],
   },
