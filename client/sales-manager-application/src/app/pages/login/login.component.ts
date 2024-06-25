@@ -9,10 +9,11 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
-import { AuthActions } from '@app/shared/stores/auth';
+import { AuthActions, AuthSelectors } from '@app/shared/stores/auth';
 import { ButtonComponent } from '@app/shared/ui/buttons/button/button.component';
 import { LoginAndRegisterLayoutComponent } from '@app/shared/ui/layouts/login-and-register-layout/login-and-register-layout.component';
 import { Store } from '@ngrx/store';
+import { Observable, combineLatest, map } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,6 +38,10 @@ export class LoginComponent {
       validators: [Validators.required, Validators.minLength(4)],
     }),
   });
+
+  vm$: Observable<{ error: string | null | undefined }> = combineLatest([
+    this.store.select(AuthSelectors.selectAuthError),
+  ]).pipe(map(([error]) => ({ error })));
 
   constructor(
     private store: Store,

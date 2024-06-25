@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  managerID: {
+    type: String,
+  },
   refreshToken: String,
 });
 

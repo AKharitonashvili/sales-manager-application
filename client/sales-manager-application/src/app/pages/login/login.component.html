@@ -1,7 +1,9 @@
 <app-login-and-register-layout
   [buttonDisabled]="formGroup.invalid"
   [formGroup]="formGroup"
+  [buttonText]="'Login'"
   (handleClick)="handleLogin()"
+  *ngIf="vm$ | async as vm"
 >
   <ng-container content>
     <section class="flex justify-center">
@@ -31,6 +33,9 @@
         </mat-error>
       </mat-form-field>
     </ng-container>
+    <mat-error *ngIf="vm.error">
+      Error: Invalid Credential {{ vm.error | json }}</mat-error
+    >
   </ng-container>
   <ng-container additionalButtons>
     <section class="flex w-full">

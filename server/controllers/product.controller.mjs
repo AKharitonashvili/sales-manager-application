@@ -49,6 +49,7 @@ export const createProduct = async (
   try {
     const product =
       await Product.create(req.body);
+
     res.status(200).json(product);
   } catch (error) {
     res

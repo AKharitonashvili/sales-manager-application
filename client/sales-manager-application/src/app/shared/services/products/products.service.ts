@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '@app/shared/models/products/products.model';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,9 @@ export class ProductsService {
   }
 
   addProduct(product: Product): Observable<Product[]> {
-    return this.http.post<Product[]>(this.url, product);
+    return this.http
+      .post<any>(this.url, product)
+      .pipe(map((v) => ({ ...v, id: v._id })));
   }
 
   editProduct(product: Product): Observable<Product[]> {

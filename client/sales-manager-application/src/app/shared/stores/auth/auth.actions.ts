@@ -30,3 +30,5 @@ export const addSalesManagerFailure = createAction(
   '[Auth] Add SalesManager Failure',
   props<{ error: string }>(),
 );
+
+export const reset = createAction('[Auth] Reset');

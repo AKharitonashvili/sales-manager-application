@@ -20,5 +20,6 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class LoginAndRegisterLayoutComponent {
   @Input() buttonDisabled!: boolean;
   @Input() formGroup!: FormGroup<any>;
+  @Input() buttonText!: string;
   @Output() handleClick = new EventEmitter();
 }

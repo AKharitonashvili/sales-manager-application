@@ -34,17 +34,7 @@ const ManagerSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
-  password: {
-    type: String,
-    required: [
-      true,
-      "Password is required",
-    ],
-  },
   products: [ProductSchema],
-  refreshToken: {
-    type: String,
-  },
 });
 
 export const Manager = mongoose.model(

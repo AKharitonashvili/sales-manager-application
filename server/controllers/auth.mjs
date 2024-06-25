@@ -1,42 +1,86 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../models/User.mjs";
+import { Manager } from "../models/managers.model.mjs";
 
 const JWT_SECRET = "your_jwt_secret";
 const JWT_REFRESH_SECRET =
   "your_jwt_refresh_secret";
 
 export const register = (req, res) => {
-  const { username, password } =
-    req.body;
-  const hashedPassword =
-    bcrypt.hashSync(password, 10);
-
-  const newUser = new User({
+  const {
     username,
-    password: hashedPassword,
-  });
+    name,
+    surname,
+    password,
+  } = req.body;
 
-  newUser
-    .save()
-    .then(() =>
-      res
-        .status(201)
-        .send("User registered")
-    )
+  User.findOne({ username })
+    .then((existingUser) => {
+      if (existingUser) {
+        return res
+          .status(400)
+          .send(
+            "Username already exists"
+          );
+      }
+
+      const hashedPassword =
+        bcrypt.hashSync(password, 10);
+
+      const newManager = new Manager({
+        username,
+        name,
+        surname,
+        registrationDate: new Date(),
+      });
+
+      const newUser = new User({
+        username,
+        password: hashedPassword,
+        managerID: newManager.id,
+      });
+
+      return newManager
+        .save()
+        .then(() => newUser.save())
+        .then(() =>
+          res.status(201).send(null)
+        )
+        .catch((err) => {
+          if (
+            err instanceof
+            mongoose.Error
+              .ValidationError
+          ) {
+            res
+              .status(400)
+              .send("Validation error");
+          } else {
+            res
+              .status(500)
+              .send(
+                "Error registering the user or manager"
+              );
+            User.deleteOne({
+              username,
+            }).exec(); // Cleanup in case of error
+            Manager.deleteOne({
+              username,
+            }).exec();
+          }
+        });
+    })
     .catch((err) =>
       res
         .status(500)
-        .send(
-          "Error registering the user"
-        )
+        .send("Database query error")
     );
 };
 
 export const login = (req, res) => {
   const { username, password } =
     req.body;
-
   User.findOne({ username })
     .then((user) => {
       if (!user) {
@@ -74,14 +118,12 @@ export const login = (req, res) => {
       );
 
       user.refreshToken = refreshToken;
-      return user
-        .save()
-        .then(() =>
-          res.json({
-            token,
-            refreshToken,
-          })
-        );
+      return user.save().then(() =>
+        res.json({
+          token,
+          refreshToken,
+        })
+      );
     })
     .catch((err) =>
       res

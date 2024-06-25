@@ -6,7 +6,7 @@
     >
       <ng-content select="[content]" />
       <app-button
-        text="Login"
+        [text]="buttonText"
         [disabled]="buttonDisabled"
         customClasses="w-full"
         (onClick)="handleClick.emit()"

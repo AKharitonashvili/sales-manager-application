@@ -104,6 +104,7 @@ export class ProductsComponent {
         : products,
       managerId,
     })),
+    tap(console.log),
   );
 
   constructor(

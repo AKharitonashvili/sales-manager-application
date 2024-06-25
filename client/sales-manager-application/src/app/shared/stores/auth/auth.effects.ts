@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
-import { AuthActions } from '.';
+import { AuthActions, AuthSelectors } from '.';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
@@ -15,7 +16,7 @@ export class AuthEffects {
         this.authService.login({ username, password }).pipe(
           map(({ id }) => AuthActions.loginSuccess({ managerId: id })),
           tap(() => this.router.navigateByUrl('/home')),
-          catchError((error) => of(AuthActions.loginFailure({ error }))),
+          catchError(({ error }) => of(AuthActions.loginFailure({ error }))),
         ),
       ),
     );
@@ -27,9 +28,10 @@ export class AuthEffects {
       switchMap(({ salesManager }) =>
         this.authService.addSalesManager(salesManager).pipe(
           map(() => AuthActions.addSalesManagerSuccess({ salesManager })),
-          catchError((error) =>
-            of(AuthActions.addSalesManagerFailure({ error })),
-          ),
+          catchError(({ error }) => {
+            this.router.navigateByUrl('/login');
+            return of(AuthActions.addSalesManagerFailure({ error }));
+          }),
         ),
       ),
     );

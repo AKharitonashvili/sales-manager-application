@@ -1,7 +1,9 @@
 <app-login-and-register-layout
   [buttonDisabled]="formGroup.invalid"
   [formGroup]="formGroup"
+  [buttonText]="'Register'"
   (handleClick)="handleRegister()"
+  *ngIf="vm$ | async as vm"
 >
   <ng-container content>
     <section class="flex justify-center">
@@ -51,5 +53,9 @@
         Password minimal Length is 4
       </mat-error>
     </mat-form-field>
+
+    <mat-error *ngIf="vm.error as error">
+      Error: Username already exists
+    </mat-error>
   </ng-container>
 </app-login-and-register-layout>

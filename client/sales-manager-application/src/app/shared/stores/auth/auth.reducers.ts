@@ -3,7 +3,7 @@ import { AuthActions } from '.';
 
 export interface AuthState {
   loading: boolean;
-  error?: string;
+  error?: string | null;
   managerId?: string | null;
   registrationSuccess?: boolean | null;
 }
@@ -16,7 +16,12 @@ export const authReducer = createReducer(
   initialState,
   on(
     AuthActions.login,
-    (state): AuthState => ({ ...state, loading: true, managerId: null }),
+    (state): AuthState => ({
+      ...state,
+      loading: true,
+      managerId: null,
+      error: undefined,
+    }),
   ),
   on(
     AuthActions.loginSuccess,
@@ -24,6 +29,7 @@ export const authReducer = createReducer(
       ...state,
       loading: false,
       managerId,
+      error: undefined,
     }),
   ),
   on(
@@ -43,6 +49,7 @@ export const authReducer = createReducer(
       ...state,
       loading: true,
       registrationSuccess: null,
+      error: undefined,
     }),
   ),
   on(
@@ -51,6 +58,7 @@ export const authReducer = createReducer(
       ...state,
       loading: false,
       registrationSuccess: true,
+      error: undefined,
     }),
   ),
   on(
@@ -62,4 +70,7 @@ export const authReducer = createReducer(
       error,
     }),
   ),
+
+  // Reset
+  on(AuthActions.reset, (): AuthState => initialState),
 );

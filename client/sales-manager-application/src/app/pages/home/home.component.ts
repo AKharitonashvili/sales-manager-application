@@ -18,10 +18,12 @@ export class HomeComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
+    private store: Store,
   ) {}
 
   handleLogout() {
     this.authService.logout();
     this.router.navigateByUrl('/login');
+    this.store.dispatch(AuthActions.reset());
   }
 }

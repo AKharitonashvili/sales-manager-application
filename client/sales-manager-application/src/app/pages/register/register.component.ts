@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthActions, AuthSelectors } from '@app/shared/stores/auth';
 import { LoginAndRegisterLayoutComponent } from '@app/shared/ui/layouts/login-and-register-layout/login-and-register-layout.component';
-import { filter, take } from 'rxjs';
+import { Observable, combineLatest, filter, map, take } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -44,6 +44,10 @@ export class RegisterComponent {
     }),
   });
 
+  vm$: Observable<{ error: string | null | undefined }> = combineLatest([
+    this.store.select(AuthSelectors.selectAuthError),
+  ]).pipe(map(([error]) => ({ error })));
+
   constructor(
     private router: Router,
     private store: Store,
@@ -61,8 +65,10 @@ export class RegisterComponent {
         filter((v) => v !== null),
         take(1),
       )
-      .subscribe(() => {
-        this.router.navigateByUrl('home/sales-managers');
+      .subscribe((success) => {
+        if (success) {
+          this.router.navigateByUrl('home/sales-managers');
+        }
       });
   }
 }
