@@ -37,6 +37,21 @@ export class AuthEffects {
     );
   });
 
+  userInfo$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.userInfo),
+      switchMap(() =>
+        this.authService.userInfo(localStorage.getItem('token')!).pipe(
+          map(({ managerID }) =>
+            AuthActions.userInfoSuccess({ managerId: managerID }),
+          ),
+          tap(() => this.router.navigateByUrl('/home')),
+          catchError(({ error }) => of(AuthActions.userInfoFailure({ error }))),
+        ),
+      ),
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private router: Router,

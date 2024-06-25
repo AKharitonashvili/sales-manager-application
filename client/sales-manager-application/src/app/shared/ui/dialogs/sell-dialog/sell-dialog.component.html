@@ -1,5 +1,30 @@
 <app-dialog-layout (close)="close()">
   <form *ngIf="data.form as form" [formGroup]="form">
+    <section class="flex flex-col gap-4">
+      <h1 class="text-2xl font-semibold">
+        {{ form.controls.name?.value }}
+      </h1>
+      <p>
+        Price:
+        <span class="text-red-500"
+          >{{ form.controls.price?.value | currency }}
+        </span>
+      </p>
+      <p>
+        Total Price:
+        <span class="text-red-500">
+          {{
+            {
+              quantity: form.controls.quantity?.value ?? 0,
+              price: form.controls.price?.value ?? 0,
+            }
+              | totalPrice
+              | currency
+          }}
+        </span>
+      </p>
+    </section>
+
     <section class="flex flex-col items-end justify-center">
       <section class="flex justify-end">
         <p class="font-bold">{{ form.controls.quantity?.value ?? 0 }}</p>
@@ -22,19 +47,6 @@
         </mat-slider>
       </section>
     </section>
-
-    <mat-form-field>
-      <mat-label>Description Of Product</mat-label>
-      <textarea
-        placeholder="Provide description of product if necessary"
-        formControlName="description"
-        matInput
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="5"
-      ></textarea>
-    </mat-form-field>
 
     <section class="flex items-center justify-end">
       <app-button [text]="'Submit'" (onClick)="close(true)"></app-button>

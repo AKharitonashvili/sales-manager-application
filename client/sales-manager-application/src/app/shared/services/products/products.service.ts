@@ -14,7 +14,7 @@ export class ProductsService {
     return this.http.get<Product[]>(this.url);
   }
 
-  addProduct(product: Product): Observable<Product[]> {
+  addProduct(product: Product): Observable<Product> {
     return this.http
       .post<any>(this.url, product)
       .pipe(map((v) => ({ ...v, id: v._id })));
@@ -26,5 +26,17 @@ export class ProductsService {
 
   deleteProduct(id: string): Observable<void> {
     return this.http.delete<void>(this.url + '/' + id);
+  }
+
+  sellProduct(
+    id: string,
+    quantity: number,
+    managerId: string,
+  ): Observable<Product[]> {
+    return this.http.post<Product[]>(this.url + '/sell/' + id, {
+      id,
+      quantity,
+      managerId,
+    });
   }
 }

@@ -117,6 +117,12 @@ export const login = (req, res) => {
         JWT_REFRESH_SECRET
       );
 
+      res.cookie("token", token);
+      res.cookie(
+        "refreshToken",
+        refreshToken
+      );
+
       user.refreshToken = refreshToken;
       return user.save().then(() =>
         res.json({
@@ -195,3 +201,47 @@ export const refreshToken = (
     }
   );
 };
+
+export const getUserInfoByToken =
+  async (req, res) => {
+    const { token } = req.body;
+
+    if (!token) {
+      return res
+        .status(403)
+        .send("Token not provided");
+    }
+
+    try {
+      const decoded = jwt.verify(
+        token,
+        JWT_SECRET
+      );
+      const userId = decoded.id;
+      const user = await User.findById(
+        userId
+      )
+        .select(
+          "username name surname managerID"
+        )
+        .exec();
+
+      if (!user) {
+        return res
+          .status(404)
+          .send("User not found");
+      }
+
+      res.json(user);
+    } catch (err) {
+      console.error(
+        "Error fetching user info:",
+        err
+      );
+      res
+        .status(500)
+        .send(
+          "Error fetching user info"
+        );
+    }
+  };

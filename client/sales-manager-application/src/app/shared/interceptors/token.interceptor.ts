@@ -5,6 +5,8 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse,
+  HttpHandlerFn,
+  HttpInterceptorFn,
 } from '@angular/common/http';
 import {
   BehaviorSubject,
@@ -24,7 +26,9 @@ export class TokenInterceptor implements HttpInterceptor {
     null,
   );
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    console.log('intercept');
+  }
 
   intercept(
     req: HttpRequest<any>,

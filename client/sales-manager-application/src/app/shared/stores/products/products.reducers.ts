@@ -32,10 +32,7 @@ export const productReducer = createReducer(
     (state, { error }): ProductsState => ({ ...state, loading: false, error }),
   ),
   // Delete Product
-  on(
-    ProductsActions.deleteProduct,
-    (state): ProductsState => ({ ...state, loading: true }),
-  ),
+
   on(
     ProductsActions.deleteProductSuccess,
     (state, { id }): ProductsState => ({
@@ -49,10 +46,7 @@ export const productReducer = createReducer(
     (state, { error }): ProductsState => ({ ...state, loading: false, error }),
   ),
   // Add Product
-  on(
-    ProductsActions.addProduct,
-    (state): ProductsState => ({ ...state, loading: true }),
-  ),
+
   on(
     ProductsActions.addProductSuccess,
     (state, { product }): ProductsState => ({
@@ -67,10 +61,7 @@ export const productReducer = createReducer(
   ),
 
   // Edit Product
-  on(
-    ProductsActions.editProduct,
-    (state): ProductsState => ({ ...state, loading: true }),
-  ),
+
   on(
     ProductsActions.editProductSuccess,
     (state, { product }): ProductsState => {
@@ -90,6 +81,37 @@ export const productReducer = createReducer(
   ),
   on(
     ProductsActions.editProductFailure,
+    (state, { error }): ProductsState => ({ ...state, loading: false, error }),
+  ),
+
+  //
+
+  on(
+    ProductsActions.sellProductSuccess,
+    (state, { id, quantity }): ProductsState => {
+      const productMap = new Map<string, Product>();
+      state.products.forEach((product) =>
+        productMap.set(product.id ?? '', product),
+      );
+
+      if (productMap.has(id ?? '')) {
+        const product = productMap.get(id ?? '') as Product;
+        if (product.quantity && quantity && id) {
+          productMap.set(id, {
+            ...product,
+            quantity: product.quantity - quantity,
+          });
+        }
+      }
+      return {
+        ...state,
+        loading: false,
+        products: Array.from(productMap.values()),
+      };
+    },
+  ),
+  on(
+    ProductsActions.sellProductFailure,
     (state, { error }): ProductsState => ({ ...state, loading: false, error }),
   ),
 );

@@ -82,4 +82,10 @@ export class AuthService {
   addSalesManager(manager: SalesManager): Observable<SalesManager[]> {
     return this.http.post<SalesManager[]>(`${this.API_URL}/register`, manager);
   }
+
+  userInfo(token: string): Observable<{ managerID: string }> {
+    return this.http.post<{ managerID: string }>(`${this.API_URL}/user-info`, {
+      token,
+    });
+  }
 }

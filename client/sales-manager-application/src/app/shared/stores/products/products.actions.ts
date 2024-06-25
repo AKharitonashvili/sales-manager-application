@@ -57,3 +57,18 @@ export const deleteProductFailure = createAction(
   '[Products] Delete Product Failure',
   props<{ error: string }>(),
 );
+
+export const sellProduct = createAction(
+  '[Products] Sell Product',
+  props<{ id: string; quantity: number; managerId: string }>(),
+);
+
+export const sellProductSuccess = createAction(
+  '[Products] Sell Product Success',
+  props<{ id: string; quantity: number }>(),
+);
+
+export const sellProductFailure = createAction(
+  '[Products] Sell Product Failure',
+  props<{ error: string }>(),
+);

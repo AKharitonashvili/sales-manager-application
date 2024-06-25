@@ -126,7 +126,6 @@ export const sellProduct = async (
     const { id } = req.params;
     const { quantity, managerId } =
       req.body;
-
     let product =
       await Product.findById(id);
 

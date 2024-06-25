@@ -32,6 +32,7 @@ import { CardComponent } from '@app/shared/ui/cards/card/card.component';
 import { EditPostDialogComponent } from '@app/shared/ui/dialogs/edit-post-dialog/edit-post-dialog.component';
 import { PageLayoutComponent } from '@app/shared/ui/layouts/page-layout/page-layout.component';
 import { AuthSelectors } from '@app/shared/stores/auth';
+import { SellDialogComponent } from '@app/shared/ui/dialogs/sell-dialog/sell-dialog.component';
 
 @Component({
   selector: 'app-products',
@@ -104,7 +105,6 @@ export class ProductsComponent {
         : products,
       managerId,
     })),
-    tap(console.log),
   );
 
   constructor(
@@ -165,5 +165,41 @@ export class ProductsComponent {
   handlePageEvent(e: PageEvent) {
     const { pageSize, pageIndex } = e;
     this.paginationSubject$.next({ pageIndex, pageSize });
+  }
+
+  sellProduct(product: Product, managerId: string) {
+    if (product) {
+      this.productForm.controls.name.setValue(product.name ?? '');
+      this.productForm.controls.price.setValue(product.price ?? 1);
+      this.productForm.controls.quantity.setValue(1);
+      this.productForm.controls.category.setValue(product.category ?? '');
+      this.productForm.controls.description.setValue(product.description ?? '');
+    }
+
+    const dialogRef = this.dialog.open(SellDialogComponent, {
+      panelClass: ['w-full', '!max-w-md', 'p-4'],
+      data: {
+        form: this.productForm,
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        map((v) => (v ? v : { success: false })),
+      )
+      .subscribe(({ success }) => {
+        if (success) {
+          this.store.dispatch(
+            ProductsActions.sellProduct({
+              id: product.id!,
+              quantity: this.productForm.controls.quantity.value ?? 1,
+              managerId,
+            }),
+          );
+        }
+        this.productForm.reset();
+      });
   }
 }

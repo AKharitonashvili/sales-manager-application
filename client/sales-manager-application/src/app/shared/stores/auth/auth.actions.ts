@@ -32,3 +32,15 @@ export const addSalesManagerFailure = createAction(
 );
 
 export const reset = createAction('[Auth] Reset');
+
+export const userInfo = createAction('[Auth] User info');
+
+export const userInfoSuccess = createAction(
+  '[Auth] User Info success',
+  props<{ managerId: string }>(),
+);
+
+export const userInfoFailure = createAction(
+  '[Auth] User Info Failure',
+  props<{ error: string }>(),
+);

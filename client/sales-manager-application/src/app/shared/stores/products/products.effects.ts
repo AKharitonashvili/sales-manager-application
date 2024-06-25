@@ -26,7 +26,6 @@ export class ProductsEffects {
       ofType(ProductsActions.addProduct),
       switchMap(({ product }) =>
         this.productsService.addProduct(product).pipe(
-          tap(console.log),
           map((product) => ProductsActions.addProductSuccess({ product })),
           catchError((error) =>
             of(ProductsActions.addProductFailure({ error })),
@@ -44,6 +43,20 @@ export class ProductsEffects {
           map(() => ProductsActions.editProductSuccess({ product })),
           catchError((error) =>
             of(ProductsActions.editProductFailure({ error })),
+          ),
+        ),
+      ),
+    );
+  });
+
+  sellProduct$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ProductsActions.sellProduct),
+      switchMap(({ id, quantity, managerId }) =>
+        this.productsService.sellProduct(id, quantity, managerId).pipe(
+          map(() => ProductsActions.sellProductSuccess({ id, quantity })),
+          catchError((error) =>
+            of(ProductsActions.sellProductFailure({ error })),
           ),
         ),
       ),

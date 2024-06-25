@@ -73,4 +73,20 @@ export const authReducer = createReducer(
 
   // Reset
   on(AuthActions.reset, (): AuthState => initialState),
+
+  // User Info
+  on(
+    AuthActions.userInfoSuccess,
+    (state, { managerId }): AuthState => ({
+      ...state,
+      managerId,
+    }),
+  ),
+  on(
+    AuthActions.addSalesManagerFailure,
+    (state, { error }): AuthState => ({
+      ...state,
+      error,
+    }),
+  ),
 );

@@ -19,7 +19,9 @@ export class HomeComponent {
     private router: Router,
     private authService: AuthService,
     private store: Store,
-  ) {}
+  ) {
+    this.store.dispatch(AuthActions.userInfo());
+  }
 
   handleLogout() {
     this.authService.logout();
