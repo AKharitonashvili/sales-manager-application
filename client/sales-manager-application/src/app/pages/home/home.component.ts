@@ -5,11 +5,12 @@ import { ButtonComponent } from '@app/shared/ui/buttons/button/button.component'
 import { Store } from '@ngrx/store';
 import { AuthActions } from '@app/shared/stores/auth';
 import { AuthService } from '@app/shared/services/auth/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, ButtonComponent],
+  imports: [CommonModule, RouterModule, ButtonComponent, TranslateModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

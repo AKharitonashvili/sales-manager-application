@@ -33,6 +33,7 @@ import { EditPostDialogComponent } from '@app/shared/ui/dialogs/edit-post-dialog
 import { PageLayoutComponent } from '@app/shared/ui/layouts/page-layout/page-layout.component';
 import { AuthSelectors } from '@app/shared/stores/auth';
 import { SellDialogComponent } from '@app/shared/ui/dialogs/sell-dialog/sell-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products',
@@ -47,6 +48,7 @@ import { SellDialogComponent } from '@app/shared/ui/dialogs/sell-dialog/sell-dia
     ReactiveFormsModule,
     CardComponent,
     MatCardModule,
+    TranslateModule,
   ],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],

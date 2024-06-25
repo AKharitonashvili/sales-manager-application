@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { AuthActions, AuthSelectors } from '@app/shared/stores/auth';
 import { LoginAndRegisterLayoutComponent } from '@app/shared/ui/layouts/login-and-register-layout/login-and-register-layout.component';
 import { Observable, combineLatest, filter, map, take } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -23,6 +24,7 @@ import { Observable, combineLatest, filter, map, take } from 'rxjs';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    TranslateModule,
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],

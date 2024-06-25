@@ -10,11 +10,12 @@ import {
   salesManagersActions,
 } from '@app/shared/stores/sales-managers';
 import { DetailsCardComponent } from '@app/shared/ui/cards/details-card/details-card.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-manager-details',
   standalone: true,
-  imports: [CommonModule, DetailsCardComponent, CardComponent],
+  imports: [CommonModule, DetailsCardComponent, CardComponent, TranslateModule],
   templateUrl: './manager-details.component.html',
   styleUrls: ['./manager-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

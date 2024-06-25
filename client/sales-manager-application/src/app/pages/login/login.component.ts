@@ -13,6 +13,7 @@ import { AuthActions, AuthSelectors } from '@app/shared/stores/auth';
 import { ButtonComponent } from '@app/shared/ui/buttons/button/button.component';
 import { LoginAndRegisterLayoutComponent } from '@app/shared/ui/layouts/login-and-register-layout/login-and-register-layout.component';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 import { Observable, combineLatest, map } from 'rxjs';
 @Component({
   selector: 'app-login',
@@ -27,6 +28,7 @@ import { Observable, combineLatest, map } from 'rxjs';
     CommonModule,
     ButtonComponent,
     LoginAndRegisterLayoutComponent,
+    TranslateModule,
   ],
 })
 export class LoginComponent {

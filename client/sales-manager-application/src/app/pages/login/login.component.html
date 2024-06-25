@@ -1,46 +1,53 @@
 <app-login-and-register-layout
   [buttonDisabled]="formGroup.invalid"
   [formGroup]="formGroup"
-  [buttonText]="'Login'"
+  [buttonText]="'common.authorization.login' | translate"
   (handleClick)="handleLogin()"
   *ngIf="vm$ | async as vm"
 >
   <ng-container content>
     <section class="flex justify-center">
-      <h1 class="text-3xl font-bold">Login</h1>
+      <h1 class="text-3xl font-bold">
+        {{ "common.authorization.login" | translate }}
+      </h1>
     </section>
 
     <ng-container [formGroup]="formGroup">
       <mat-form-field>
-        <mat-label>Username</mat-label>
+        <mat-label>{{ "common.authorization.username" | translate }}</mat-label>
         <input matInput formControlName="username" />
         <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
-          Username is required
+          {{ "common.authorization.username" | translate }}
+          {{ "common.authorization.required" | translate }}
         </mat-error>
         <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
-          Password minimal Length is 4
+          {{ "common.authorization.username" | translate }}
+          {{ "common.authorization.minimal_length" | translate }}4
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Password</mat-label>
+        <mat-label>{{ "common.authorization.password" | translate }}</mat-label>
         <input matInput formControlName="password" type="password" />
         <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
-          Password is required
+          {{ "common.authorization.password" | translate }}
+          {{ "common.authorization.required" | translate }}
         </mat-error>
         <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
-          Password minimal Length is 4
+          {{ "common.authorization.password" | translate }}
+          {{ "common.authorization.minimal_length" | translate }}4
         </mat-error>
       </mat-form-field>
     </ng-container>
     <mat-error *ngIf="vm.error">
-      Error: Invalid Credential {{ vm.error | json }}</mat-error
-    >
+      {{ "Error: Invalid Credential" | translate }}
+      {{ vm.error | json }}
+    </mat-error>
   </ng-container>
   <ng-container additionalButtons>
     <section class="flex w-full">
       <app-button
-        text="Register"
+        [text]="'common.authorization.register' | translate"
         class="w-full"
         customClasses="w-full"
         (click)="redirectToRegister()"

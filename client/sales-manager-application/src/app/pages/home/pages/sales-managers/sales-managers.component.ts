@@ -17,6 +17,7 @@ import {
 import { ButtonComponent } from '@app/shared/ui/buttons/button/button.component';
 import { PageLayoutComponent } from '@app/shared/ui/layouts/page-layout/page-layout.component';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sales-managers',
@@ -30,6 +31,7 @@ import { Store } from '@ngrx/store';
     MatMomentDateModule,
     CardComponent,
     ButtonComponent,
+    TranslateModule,
   ],
   providers: [MatNativeDateModule],
   templateUrl: './sales-managers.component.html',

@@ -7,9 +7,9 @@
     <ng-container items>
       <section class="flex flex-col gap-4">
         <section class="flex justify-between">
-          <h1 class="font-bold">Products Sold:</h1>
+          <h1 class="font-bold">{{ "Products Sold" | translate }}:</h1>
           <p>
-            Total sales revenue:
+            {{ "common.sales_managers.total_sales_revenue" | translate }}:
             <span class="font-semibold text-red-500">
               {{ manager.totalSalesRevenue | currency }}
             </span>
@@ -23,13 +23,14 @@
           >
             <ng-container details>
               <p>
-                Income:
+                {{ "common.sales_managers.income" | translate }}:
                 <span class="font-semibold text-red-500">
                   {{ item.price | currency }}
                 </span>
               </p>
               <p class="text-gray-500">
-                Sale date: {{ item.saleDate | date: "dd/MM/yyyy HH:mm" }}
+                {{ "common.sales_managers.sale_date" | translate }}:
+                {{ item.saleDate | date: "dd/MM/yyyy HH:mm" }}
               </p>
             </ng-container>
           </app-card>

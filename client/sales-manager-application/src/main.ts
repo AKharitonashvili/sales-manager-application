@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule, provideState, provideStore } from '@ngrx/store';
 import {
   HTTP_INTERCEPTORS,
+  HttpClient,
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
@@ -23,6 +24,12 @@ import { salesManagerReducer } from './app/shared/stores/sales-managers/sales-ma
 import { SALES_MANAGERS_FEATURE_KEY } from './app/shared/stores/sales-managers/sales-managers.selectors';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptor } from '@app/shared/interceptors/token.interceptor';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function createTranslateLoader(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, '../assets/i18n/', '.json');
+}
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -56,5 +63,15 @@ bootstrapApplication(AppComponent, {
       useClass: TokenInterceptor,
       multi: true,
     },
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: createTranslateLoader,
+          deps: [HttpClient],
+        },
+        defaultLanguage: 'en-US',
+      }),
+    ),
   ],
 }).catch((err) => console.error(err));

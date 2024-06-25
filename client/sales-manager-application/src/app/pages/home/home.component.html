@@ -3,19 +3,19 @@
     <nav class="flex w-full justify-between">
       <section class="flex gap-4">
         <app-button
-          [text]="'Products'"
+          [text]="'common.header.products' | translate"
           [routerLink]="'products'"
           [customClasses]="'bg-transparent border-0'"
         ></app-button>
         <app-button
-          [text]="'Sales Managers'"
+          [text]="'common.header.sales_managers' | translate"
           [routerLink]="'sales-managers'"
           [customClasses]="'bg-transparent border-0'"
         ></app-button>
       </section>
       <section>
         <app-button
-          [text]="'Logout'"
+          [text]="'common.header.logout' | translate"
           [customClasses]="'bg-transparent border-0'"
           (click)="handleLogout()"
         ></app-button>

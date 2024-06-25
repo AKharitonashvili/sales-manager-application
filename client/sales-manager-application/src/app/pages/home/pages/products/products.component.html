@@ -1,7 +1,7 @@
 <app-page-layout
   *ngIf="vm$ | async as vm"
-  [filterInputLabel]="'Filter Products by Name'"
-  [openAddDialogButtonText]="'Add Product'"
+  [filterInputLabel]="'common.products.filter_product_by_name' | translate"
+  [openAddDialogButtonText]="'common.products.add_product' | translate"
   (handleAddOrEditButton)="openEditProductDialog()"
 >
   <ng-container filter>
@@ -11,7 +11,9 @@
       [formGroup]="filterForm"
     >
       <mat-form-field>
-        <mat-label>Filter Products by Name</mat-label>
+        <mat-label>{{
+          "common.products.filter_product_by_name" | translate
+        }}</mat-label>
         <input
           class="border border-primary"
           type="text"
@@ -33,19 +35,29 @@
       </ng-container>
 
       <ng-container details>
-        <p>Price: {{ item.price | currency }}</p>
-        <p class="text-gray-500">{{ item.quantity }} left in stock</p>
+        <p>
+          {{ "common.products.price" | translate }}: {{ item.price | currency }}
+        </p>
+        <p class="text-gray-500">
+          {{ item.quantity }} {{ "common.products.left_in_stock" | translate }}
+        </p>
       </ng-container>
 
       <ng-container buttons>
         <ng-container>
           <app-button
-            text="Sell"
+            [text]="'common.products.sell' | translate"
             (onClick)="sellProduct(item, vm.managerId ?? '')"
           />
         </ng-container>
-        <app-button text="Edit" (onClick)="openEditProductDialog(item)" />
-        <app-button text="Delete" (onClick)="deleteProduct(item.id ?? '')" />
+        <app-button
+          [text]="'common.products.edit' | translate"
+          (onClick)="openEditProductDialog(item)"
+        />
+        <app-button
+          [text]="'common.products.delete' | translate"
+          (onClick)="deleteProduct(item.id ?? '')"
+        />
       </ng-container>
     </app-card>
   </ng-container>

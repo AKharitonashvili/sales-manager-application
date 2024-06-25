@@ -1,61 +1,71 @@
 <app-login-and-register-layout
   [buttonDisabled]="formGroup.invalid"
   [formGroup]="formGroup"
-  [buttonText]="'Register'"
+  [buttonText]="'common.authorization.register' | translate"
   (handleClick)="handleRegister()"
   *ngIf="vm$ | async as vm"
 >
   <ng-container content>
     <section class="flex justify-center">
-      <h1 class="text-3xl font-bold">Manager Registration</h1>
+      <h1 class="text-3xl font-bold">
+        {{ "common.authorization.manager_registration" | translate }}
+      </h1>
     </section>
 
     <mat-form-field>
-      <mat-label>Username</mat-label>
+      <mat-label> {{ "common.authorization.username" | translate }}</mat-label>
       <input matInput formControlName="username" />
       <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
-        Username is required
+        {{ "common.authorization.username" | translate }}
+        {{ "common.authorization.required" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
-        Username minimal Length is 4
+        {{ "common.authorization.username" | translate }}
+        {{ "common.authorization.minimal_length" | translate }}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label> {{ "common.authorization.name" | translate }}</mat-label>
       <input matInput formControlName="name" />
       <mat-error *ngIf="formGroup.get('name')?.hasError('required')">
-        Name is required
+        {{ "common.authorization.name" | translate }}
+        {{ "common.authorization.required" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.get('name')?.hasError('minlength')">
-        Name minimal Length is 4
+        {{ "common.authorization.name" | translate }}
+        {{ "common.authorization.minimal_length" | translate }}4
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Surname</mat-label>
+      <mat-label>{{ "common.authorization.surname" | translate }}</mat-label>
       <input matInput formControlName="surname" />
       <mat-error *ngIf="formGroup.get('surname')?.hasError('required')">
-        Surname is required
+        {{ "common.authorization.surname" | translate }}
+        {{ "common.authorization.required" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.get('surname')?.hasError('minlength')">
-        Surname minimal Length is 4
+        {{ "common.authorization.surname" | translate }}
+        {{ "common.authorization.minimal_length" | translate }}4
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Password</mat-label>
+      <mat-label> {{ "common.authorization.password" | translate }}</mat-label>
       <input matInput formControlName="password" type="password" />
       <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
-        Password is required
+        {{ "common.authorization.password" | translate }}
+        {{ "common.authorization.required" | translate }}
       </mat-error>
       <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
-        Password minimal Length is 4
+        {{ "common.authorization.password" | translate }}
+        {{ "common.authorization.minimal_length" | translate }}4
       </mat-error>
     </mat-form-field>
 
     <mat-error *ngIf="vm.error as error">
-      Error: Username already exists
+      {{ error | json }}
     </mat-error>
   </ng-container>
 </app-login-and-register-layout>

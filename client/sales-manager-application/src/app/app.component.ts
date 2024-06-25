@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { CommonModule } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { AuthActions } from './shared/stores/auth';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',

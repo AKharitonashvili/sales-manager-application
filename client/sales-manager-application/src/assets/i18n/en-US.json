@@ -1,0 +1,38 @@
+{
+  "common.header.products": "Products",
+  "common.header.sales_managers": "Sales Managers",
+  "common.header.logout": "Logout",
+
+  "common.products.add_product": "Add Product",
+  "common.products.filter_product_by_name": "Filter Products by Name",
+  "common.products.price": "Price",
+  "common.products.left_in_stock": "left in stock",
+  "common.products.sell": "Sell",
+  "common.products.edit": "Edit",
+  "common.products.delete": "Delete",
+
+  "common.sales_managers.add_sales_manager": "Add Sales Manager",
+  "common.sales_managers.filter_by_username": "Filter by username",
+  "common.sales_managers.Filter_by_name": "Filter by name",
+  "common.sales_managers.filter_by_surname": "Filter by surname",
+  "common.sales_managers.filter_by_registration_start": "Filter by registration date start",
+  "common.sales_managers.filter_by_registration_end": "Filter by registration date end",
+  "common.sales_managers.filter_by_revenue_min": "Filter Total Revenue Min",
+  "common.sales_managers.filter_by_revenue_max": "Filter Total Revenue Max",
+  "common.sales_managers.registration_date": "Registration Date",
+  "common.sales_managers.total_sales_revenue": "Total Sales Revenue",
+  "common.sales_managers.details": "Details",
+
+  "common.sales_managers.income": "Income",
+  "common.sales_managers.sale_date": "Sale date",
+
+  "common.authorization.login": "Login",
+  "common.authorization.username": "Username",
+  "common.authorization.name": "Name",
+  "common.authorization.surname": "Surname",
+  "common.authorization.password": "Password",
+  "common.authorization.required": "is required ",
+  "common.authorization.minimal_length": "Income",
+  "common.authorization.register": "Register",
+  "common.authorization.manager_registration": "Manager Registration"
+}

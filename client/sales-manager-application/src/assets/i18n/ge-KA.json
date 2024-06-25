@@ -1,0 +1,38 @@
+{
+  "common.header.products": "პროდუქტები",
+  "common.header.sales_managers": "გაყიდვების მენეჯერები",
+  "common.header.logout": "გასვლა",
+
+  "common.products.add_product": "პროდუქტის დამატება",
+  "common.products.filter_product_by_name": "პროდუქტის გაფილტვრა სახელის მიხედვით",
+  "common.products.price": "ფასი",
+  "common.products.left_in_stock": "დარჩენილია მარაგში",
+  "common.products.sell": "გაყიდვა",
+  "common.products.edit": "რედაქტირება",
+  "common.products.delete": "წაშლა",
+
+  "common.sales_managers.add_sales_manager": "გაყიდვების მენეჯერის დამატება",
+  "common.sales_managers.filter_by_username": "გაფილტვრა მომხმარებლის სახელით",
+  "common.sales_managers.Filter_by_name": "გაფილტვრა სახელით",
+  "common.sales_managers.filter_by_surname": "გაფილტვრა გვარით",
+  "common.sales_managers.filter_by_registration_start": "გაფილტვრა რეგისტრაციის თარიღის დასაწყისით",
+  "common.sales_managers.filter_by_registration_end": "გაფილტვრა რეგისტრაციის თარიღის დასასრულით",
+  "common.sales_managers.filter_by_revenue_min": "გაფილტვრა მინიმალური შემოსავლის მიხედვით",
+  "common.sales_managers.filter_by_revenue_max": "გაფილტვრა მაქსიმალური შემოსავლის მიხედვით",
+  "common.sales_managers.registration_date": "რეგისტრაციის თარიღი",
+  "common.sales_managers.total_sales_revenue": "გაყიდვების მთლიანი შემოსავალი",
+  "common.sales_managers.details": "დეტალები",
+
+  "common.sales_managers.income": "შემოსავალი",
+  "common.sales_managers.sale_date": "გაყიდვის თარიღი",
+
+  "common.authorization.login": "შესვლა",
+  "common.authorization.username": "მომხმარებლის სახელი",
+  "common.authorization.name": "სახელი",
+  "common.authorization.surname": "გვარი",
+  "common.authorization.password": "პაროლი",
+  "common.authorization.required": "სავალდებულოა",
+  "common.authorization.minimal_length": "მინიმალური სიგრძე",
+  "common.authorization.register": "რეგისტრაცია",
+  "common.authorization.manager_registration": "მენეჯერის რეგისტრაცია"
+}

@@ -1,6 +1,8 @@
 <app-page-layout
   (handleAddOrEditButton)="registerNewManager()"
-  [openAddDialogButtonText]="'Add Sales Manager'"
+  [openAddDialogButtonText]="
+    'common.sales_managers.add_sales_manager' | translate
+  "
   *ngIf="vm$ | async as vm"
 >
   <ng-container filter>
@@ -11,7 +13,9 @@
     >
       <section class="flex flex-col gap-4">
         <mat-form-field>
-          <mat-label>Filter by username</mat-label>
+          <mat-label>{{
+            "common.sales_managers.filter_by_username" | translate
+          }}</mat-label>
           <input
             class="border border-primary"
             type="text"
@@ -20,7 +24,9 @@
           />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Filter by name</mat-label>
+          <mat-label>{{
+            "common.sales_managers.filter_by_name" | translate
+          }}</mat-label>
           <input
             class="border border-primary"
             type="text"
@@ -29,7 +35,9 @@
           />
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Filter by surname</mat-label>
+          <mat-label>{{
+            "common.sales_managers.filter_by_surname" | translate
+          }}</mat-label>
           <input
             class="border border-primary"
             type="text"
@@ -41,7 +49,11 @@
 
       <section class="flex flex-col gap-4">
         <mat-form-field (click)="pickerStart.open()">
-          <mat-label>Filter by registration date start</mat-label>
+          <mat-label>
+            {{
+              "common.sales_managers.filter_by_registration_start" | translate
+            }}
+          </mat-label>
           <input
             matInput
             [matDatepicker]="pickerStart"
@@ -57,7 +69,9 @@
         </mat-form-field>
 
         <mat-form-field (click)="pickerEnd.open()">
-          <mat-label>Filter by registration date end</mat-label>
+          <mat-label>
+            {{ "common.sales_managers.filter_by_registration_end" | translate }}
+          </mat-label>
           <input
             matInput
             [matDatepicker]="pickerEnd"
@@ -75,7 +89,9 @@
 
       <section class="flex flex-col gap-4">
         <mat-form-field>
-          <mat-label>Filter Total Revenue Min</mat-label>
+          <mat-label>{{
+            "common.sales_managers.filter_by_revenue_min" | translate
+          }}</mat-label>
           <input
             class="border border-primary"
             type="number"
@@ -85,7 +101,9 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Filter Total Revenue Max</mat-label>
+          <mat-label>{{
+            "common.sales_managers.filter_by_revenue_max" | translate
+          }}</mat-label>
           <input
             class="border border-primary"
             type="number"
@@ -106,14 +124,18 @@
     >
       <ng-container details>
         <p class="text-end">
-          Registration Date: {{ item.registrationDate | date: "dd/MM/yyyy" }}
+          {{ "common.sales_managers.registration_date" | translate }}:
+          {{ item.registrationDate | date: "dd/MM/yyyy" }}
         </p>
-        <p>Total Sales Revenue: {{ item.totalSalesRevenue | currency }}</p>
+        <p>
+          {{ "common.sales_managers.total_sales_revenue" | translate }}:
+          {{ item.totalSalesRevenue | currency }}
+        </p>
       </ng-container>
 
       <ng-container buttons>
         <app-button
-          text="Details"
+          [text]="'common.sales_managers.details' | translate"
           (click)="navigateToManagerDetails(item.id ?? '')"
         />
       </ng-container>
