@@ -38,6 +38,8 @@ import { PageLayoutComponent } from '@app/shared/ui/layouts/page-layout/page-lay
 import { AuthSelectors } from '@app/shared/stores/auth';
 import { SellDialogComponent } from '@app/shared/ui/dialogs/sell-dialog/sell-dialog.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { SkeletonModule } from 'primeng/skeleton';
+import { listAnimation } from '@app/shared/animations/animations';
 
 @Component({
   selector: 'app-products',
@@ -53,11 +55,13 @@ import { TranslateModule } from '@ngx-translate/core';
     CardComponent,
     MatCardModule,
     TranslateModule,
+    SkeletonModule,
   ],
   providers: [MatPaginatorIntl],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [listAnimation],
 })
 export class ProductsComponent {
   filterForm: FormGroup<ToFormGroup<{ filterControl: string | null }>> =
@@ -86,6 +90,7 @@ export class ProductsComponent {
   vm$: Observable<{
     products: Product[];
     managerId: string | null | undefined;
+    loading: boolean;
   }> = combineLatest([
     this.store.select(ProductSelectors.selectProducts).pipe(
       tap((products) => this.paginationLength$.next(products.length)),
@@ -103,14 +108,16 @@ export class ProductsComponent {
     ),
     this.filterForm.controls.filterControl.valueChanges.pipe(startWith(null)),
     this.store.select(AuthSelectors.selectManagerId),
+    this.store.select(ProductSelectors.selectProductsLoading),
   ]).pipe(
-    map(([products, filter, managerId]) => ({
+    map(([products, filter, managerId, loading]) => ({
       products: filter
         ? products.filter((p) =>
             p.name?.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
           )
         : products,
       managerId,
+      loading,
     })),
   );
 
@@ -187,6 +194,7 @@ export class ProductsComponent {
       panelClass: ['w-full', '!max-w-md', 'p-4'],
       data: {
         form: this.productForm,
+        maxQuantity: product.quantity,
       },
     });
 

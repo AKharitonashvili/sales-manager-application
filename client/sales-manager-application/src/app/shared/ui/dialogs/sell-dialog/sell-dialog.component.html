@@ -33,7 +33,7 @@
         <p>Quantity Of Product:</p>
         <mat-slider
           min="1"
-          max="100"
+          [max]="data.maxQuantity"
           step="1"
           showTickMarks
           discrete

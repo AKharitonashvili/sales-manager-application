@@ -25,41 +25,55 @@
   </ng-container>
 
   <ng-container items>
-    <app-card
-      *ngFor="let item of vm.products"
-      [headerText]="item.name"
-      [headerSubText]="item.category"
-    >
-      <ng-container description>
-        <p>{{ item.description }}</p>
-      </ng-container>
+    <ng-container *ngIf="!vm.loading; else itemsloader">
+      <app-card
+        *ngFor="let item of vm.products"
+        [headerText]="item.name"
+        [headerSubText]="item.category"
+        @listAnimation
+      >
+        <ng-container description>
+          <p>{{ item.description }}</p>
+        </ng-container>
 
-      <ng-container details>
-        <p>
-          {{ "common.products.price" | translate }}: {{ item.price | currency }}
-        </p>
-        <p class="text-gray-500">
-          {{ item.quantity }} {{ "common.products.left_in_stock" | translate }}
-        </p>
-      </ng-container>
+        <ng-container details>
+          <p>
+            {{ "common.products.price" | translate }}:
+            {{ item.price | currency }}
+          </p>
+          <p class="text-gray-500">
+            {{ item.quantity }}
+            {{ "common.products.left_in_stock" | translate }}
+          </p>
+        </ng-container>
 
-      <ng-container buttons>
-        <ng-container>
+        <ng-container buttons>
+          <ng-container>
+            <app-button
+              [text]="'common.products.sell' | translate"
+              [disabled]="item.quantity === 0"
+              (onClick)="sellProduct(item, vm.managerId ?? '')"
+            />
+          </ng-container>
           <app-button
-            [text]="'common.products.sell' | translate"
-            (onClick)="sellProduct(item, vm.managerId ?? '')"
+            [text]="'common.products.edit' | translate"
+            (onClick)="openEditProductDialog(item)"
+          />
+          <app-button
+            [text]="'common.products.delete' | translate"
+            (onClick)="deleteProduct(item.id ?? '')"
           />
         </ng-container>
-        <app-button
-          [text]="'common.products.edit' | translate"
-          (onClick)="openEditProductDialog(item)"
-        />
-        <app-button
-          [text]="'common.products.delete' | translate"
-          (onClick)="deleteProduct(item.id ?? '')"
-        />
-      </ng-container>
-    </app-card>
+      </app-card>
+    </ng-container>
+    <ng-template #itemsloader>
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+    </ng-template>
   </ng-container>
   <ng-container pagination>
     <mat-paginator

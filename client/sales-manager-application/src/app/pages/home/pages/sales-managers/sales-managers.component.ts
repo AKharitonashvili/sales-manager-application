@@ -18,6 +18,9 @@ import { ButtonComponent } from '@app/shared/ui/buttons/button/button.component'
 import { PageLayoutComponent } from '@app/shared/ui/layouts/page-layout/page-layout.component';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import { SkeletonModule } from 'primeng/skeleton';
+import { listAnimation } from '@app/shared/animations/animations';
+import { AuthSelectors } from '@app/shared/stores/auth';
 
 @Component({
   selector: 'app-sales-managers',
@@ -32,11 +35,13 @@ import { TranslateModule } from '@ngx-translate/core';
     CardComponent,
     ButtonComponent,
     TranslateModule,
+    SkeletonModule,
   ],
   providers: [MatNativeDateModule],
   templateUrl: './sales-managers.component.html',
   styleUrls: ['./sales-managers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [listAnimation],
 })
 export class SalesManagersComponent {
   filterForm: FormGroup<
@@ -71,7 +76,11 @@ export class SalesManagersComponent {
     name: new FormControl<string | null>(null),
   });
 
-  vm$: Observable<{ salesManagers: SalesManager[] }> = combineLatest([
+  vm$: Observable<{
+    salesManagers: SalesManager[];
+    loading: boolean;
+    managerId: string | null | undefined;
+  }> = combineLatest([
     this.store.select(salesManagersSelectors.selectSalesManagers),
     this.filterForm.valueChanges.pipe(
       startWith({
@@ -85,8 +94,10 @@ export class SalesManagersComponent {
       }),
       debounceTime(300),
     ),
+    this.store.select(salesManagersSelectors.selectSalesManagersLoading),
+    this.store.select(AuthSelectors.selectManagerId),
   ]).pipe(
-    map(([salesManagers, filters]) => {
+    map(([salesManagers, filters, loading, managerId]) => {
       const filtersMap = new Map<string, any>(
         Object.entries(filters).filter(([key, value]) => value != null),
       );
@@ -156,7 +167,7 @@ export class SalesManagersComponent {
         }
       });
 
-      return { salesManagers };
+      return { salesManagers, loading, managerId };
     }),
   );
 

@@ -42,7 +42,7 @@ export class SellDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<EditPostDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { form: FormGroup<ToFormGroup<Product>> },
+    public data: { form: FormGroup<ToFormGroup<Product>>; maxQuantity: number },
   ) {}
 
   formatLabel(value: number): string {

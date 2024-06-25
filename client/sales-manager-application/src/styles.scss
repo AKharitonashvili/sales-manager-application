@@ -49,6 +49,9 @@ $sales-manager-application-theme: mat.define-light-theme(
   }
 }
 
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
 // Tailwind CSS
 @tailwind base;
 @tailwind components;

@@ -116,29 +116,43 @@
   </ng-container>
 
   <ng-container items>
-    <app-card
-      *ngFor="let item of vm.salesManagers"
-      [headerText]="item.username"
-      [headerSubText]="item.name + ' ' + item.surname"
-      [hideDescription]="true"
-    >
-      <ng-container details>
-        <p class="text-end">
-          {{ "common.sales_managers.registration_date" | translate }}:
-          {{ item.registrationDate | date: "dd/MM/yyyy" }}
-        </p>
-        <p>
-          {{ "common.sales_managers.total_sales_revenue" | translate }}:
-          {{ item.totalSalesRevenue | currency }}
-        </p>
-      </ng-container>
+    <ng-container *ngIf="!vm.loading; else itemsloader">
+      <app-card
+        *ngFor="let item of vm.salesManagers"
+        [headerText]="item.username"
+        [headerSubText]="item.name + ' ' + item.surname"
+        [hideDescription]="true"
+        [currentUser]="item.id === vm.managerId"
+        @listAnimation
+      >
+        <ng-container details>
+          <p class="text-end">
+            {{ "common.sales_managers.registration_date" | translate }}:
+            {{ item.registrationDate | date: "dd/MM/yyyy" }}
+          </p>
+          <p>
+            {{ "common.sales_managers.total_sales_revenue" | translate }}:
+            {{ item.totalSalesRevenue | currency }}
+          </p>
+        </ng-container>
 
-      <ng-container buttons>
-        <app-button
-          [text]="'common.sales_managers.details' | translate"
-          (click)="navigateToManagerDetails(item.id ?? '')"
-        />
-      </ng-container>
-    </app-card>
+        <ng-container buttons>
+          <app-button
+            [text]="'common.sales_managers.details' | translate"
+            [customClasses]="item.id === vm.managerId ? 'bg-secondary' : ''"
+            (click)="navigateToManagerDetails(item.id ?? '')"
+          />
+        </ng-container>
+      </app-card>
+    </ng-container>
+
+    <ng-template #itemsloader>
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+      <p-skeleton height="20.125rem" />
+    </ng-template>
   </ng-container>
 </app-page-layout>
