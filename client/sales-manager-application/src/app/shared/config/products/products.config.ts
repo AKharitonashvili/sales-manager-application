@@ -1,4 +1,4 @@
-import { ProductsCategoryEnum } from 'src/app/enums/products/products.enum';
+import { ProductsCategoryEnum } from '@app/shared/enums/products/products.enum';
 
 export const productsCategoryies: ProductsCategoryEnum[] = [
   ProductsCategoryEnum.Clothing,

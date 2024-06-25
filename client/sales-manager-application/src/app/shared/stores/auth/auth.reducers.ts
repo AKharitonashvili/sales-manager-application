@@ -5,6 +5,7 @@ export interface AuthState {
   loading: boolean;
   error?: string;
   isLoggedIn: boolean;
+  managerId?: string | null;
   registrationSuccess?: boolean | null;
 }
 
@@ -15,18 +16,27 @@ export const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(AuthActions.login, (state): AuthState => ({ ...state, loading: true })),
+  on(
+    AuthActions.login,
+    (state): AuthState => ({ ...state, loading: true, managerId: null }),
+  ),
   on(
     AuthActions.loginSuccess,
-    (state): AuthState => ({
+    (state, { managerId }): AuthState => ({
       ...state,
       loading: false,
       isLoggedIn: true,
+      managerId,
     }),
   ),
   on(
     AuthActions.loginFailure,
-    (state, { error }): AuthState => ({ ...state, loading: false, error }),
+    (state, { error }): AuthState => ({
+      ...state,
+      loading: false,
+      error,
+      managerId: null,
+    }),
   ),
   on(
     AuthActions.checkIfLoggedIn,

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { SalesManagersState } from './sales-managers.reducers';
-import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
+import { SalesManager } from '../../models/sales-managers/sales-managers.models';
 
 export const SALES_MANAGERS_FEATURE_KEY = 'SalesManagers';
 

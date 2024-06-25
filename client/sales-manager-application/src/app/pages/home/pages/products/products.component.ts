@@ -12,32 +12,26 @@ import {
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 import {
-  ProductSelectors,
-  ProductsActions,
-} from '../../../../../app/stores/products';
-import {
-  Product,
-  ProductForm,
-} from '../../../../../app/models/products/products.model';
-import {
-  FormControl,
-  FormGroup,
   ReactiveFormsModule,
+  FormGroup,
+  FormControl,
   Validators,
 } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { ToFormGroup } from '../../../../../app/models/shared.moelds';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { EditPostDialogComponent } from '../../../../../app/shared/ui/dialogs/edit-post-dialog/edit-post-dialog.component';
-import {
-  MatPaginatorIntl,
-  MatPaginatorModule,
-  PageEvent,
-} from '@angular/material/paginator';
-import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
-import { PageLayoutComponent } from 'src/app/shared/ui/layouts/page-layout/page-layout.component';
-import { CardComponent } from 'src/app/shared/ui/cards/card/card.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import {
+  ProductForm,
+  Product,
+} from '@app/shared/models/products/products.model';
+import { ToFormGroup } from '@app/shared/models/shared.moelds';
+import { ProductSelectors, ProductsActions } from '@app/shared/stores/products';
+import { ButtonComponent } from '@app/shared/ui/buttons/button/button.component';
+import { CardComponent } from '@app/shared/ui/cards/card/card.component';
+import { EditPostDialogComponent } from '@app/shared/ui/dialogs/edit-post-dialog/edit-post-dialog.component';
+import { PageLayoutComponent } from '@app/shared/ui/layouts/page-layout/page-layout.component';
+import { AuthSelectors } from '@app/shared/stores/auth';
 
 @Component({
   selector: 'app-products',
@@ -81,7 +75,10 @@ export class ProductsComponent {
 
   paginationLength$ = new BehaviorSubject<number>(0);
 
-  vm$: Observable<{ products: Product[] }> = combineLatest([
+  vm$: Observable<{
+    products: Product[];
+    managerId: string | null | undefined;
+  }> = combineLatest([
     this.store.select(ProductSelectors.selectProducts).pipe(
       tap((products) => this.paginationLength$.next(products.length)),
       switchMap((products) =>
@@ -97,13 +94,15 @@ export class ProductsComponent {
       ),
     ),
     this.filterForm.controls.filterControl.valueChanges.pipe(startWith(null)),
+    this.store.select(AuthSelectors.selectManagerId),
   ]).pipe(
-    map(([products, filter]) => ({
+    map(([products, filter, managerId]) => ({
       products: filter
         ? products.filter((p) =>
             p.name?.toLocaleLowerCase().includes(filter.toLocaleLowerCase()),
           )
         : products,
+      managerId,
     })),
   );
 

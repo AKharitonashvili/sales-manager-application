@@ -6,23 +6,31 @@ import { AppRoutingModule } from './app/app-routing.module';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule, provideState, provideStore } from '@ngrx/store';
-import { authReducer } from './app/stores/auth/auth.reducers';
-import { EffectsModule, provideEffects } from '@ngrx/effects';
-import { AuthEffects } from './app/stores/auth/auth.effects';
-import { AUTH_FEATURE_KEY } from './app/stores/auth/auth.selectors';
-import { PRODUCTS_FEATURE_KEY } from './app/stores/products/products.selectors';
-import { productReducer } from './app/stores/products/products.reducers';
-import { ProductsEffects } from './app/stores/products/products.effects';
-import { SALES_MANAGERS_FEATURE_KEY } from './app/stores/sales-managers/sales-managers.selectors';
-import { salesManagerReducer } from './app/stores/sales-managers/sales-managers.reducers';
-import { SalesManagersEffects } from './app/stores/sales-managers/sales-managers.effects';
-import { provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
+import { provideEffects } from '@ngrx/effects';
+import { AuthEffects } from './app/shared/stores/auth/auth.effects';
+import { authReducer } from './app/shared/stores/auth/auth.reducers';
+import { AUTH_FEATURE_KEY } from './app/shared/stores/auth/auth.selectors';
+import { ProductsEffects } from './app/shared/stores/products/products.effects';
+import { productReducer } from './app/shared/stores/products/products.reducers';
+import { PRODUCTS_FEATURE_KEY } from './app/shared/stores/products/products.selectors';
+import { SalesManagersEffects } from './app/shared/stores/sales-managers/sales-managers.effects';
+import { salesManagerReducer } from './app/shared/stores/sales-managers/sales-managers.reducers';
+import { SALES_MANAGERS_FEATURE_KEY } from './app/shared/stores/sales-managers/sales-managers.selectors';
+import { JwtModule } from '@auth0/angular-jwt';
+import { TokenInterceptor } from '@app/shared/interceptors/token.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
       BrowserModule,
       AppRoutingModule,
+      BrowserAnimationsModule,
+      BrowserAnimationsModule,
       BrowserAnimationsModule,
     ),
     provideStore(),
@@ -36,5 +44,17 @@ bootstrapApplication(AppComponent, {
     }),
     provideEffects([SalesManagersEffects]),
     provideHttpClient(),
+    importProvidersFrom([
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: () => localStorage.getItem('token'),
+        },
+      }),
+    ]),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
   ],
 }).catch((err) => console.error(err));

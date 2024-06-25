@@ -1,3 +1,44 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$sales-manager-application-primary: mat.define-palette(mat.$indigo-palette);
+$sales-manager-application-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$sales-manager-application-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$sales-manager-application-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $sales-manager-application-primary,
+      accent: $sales-manager-application-accent,
+      warn: $sales-manager-application-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($sales-manager-application-theme);
+
 * {
   box-sizing: border-box;
   @apply rounded-md;
@@ -20,6 +61,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--secondary);
 }
 
 mat-form-field {
@@ -27,7 +69,13 @@ mat-form-field {
 }
 
 :root {
-  --primary: red;
+  --primary: #b6c7aa;
+  --secondary: #3c3633;
+  --secondary-light: #3c363350;
+  --light: #eeedeb;
+  --light-warm: #e0ccbe;
+  --mdc-elevated-card-container-color: var(--primary);
+  --mat-badge-background-color: var(--primary);
 }
 
 button,
@@ -39,4 +87,49 @@ a {
   &:hover {
     @apply opacity-80;
   }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-mdc-card {
+  --mdc-elevated-card-container-color: var(--light) !important;
+}
+
+.mat-mdc-card-outlined {
+  border-color: var(--secondary-light) !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface,
+.mdc-text-field--filled:not(.mdc-text-field--disabled),
+.mat-mdc-paginator,
+.mdc-menu-surface {
+  background-color: var(--light) !important;
+}
+
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: var(--primary);
+  --mdc-slider-focus-handle-color: var(--primary);
+  --mdc-slider-hover-handle-color: var(--primary);
+  --mdc-slider-active-track-color: var(--primary);
+  --mdc-slider-inactive-track-color: var(--primary);
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: var(--primary);
+  --mat-mdc-slider-ripple-color: var(--primary);
+  --mat-mdc-slider-hover-ripple-color: rgba(63, 81, 181, 0.05);
+  --mat-mdc-slider-focus-ripple-color: rgba(63, 81, 181, 0.2);
+}
+
+.mdc-text-field--filled .mdc-line-ripple::after,
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label,
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label,
+.mat-mdc-dialog-container {
+  border-bottom-color: var(--primary);
+  color: var(--secondary);
 }

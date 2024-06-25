@@ -24,3 +24,8 @@ export const selectRegistrationSuccess = createSelector(
   selectAuthFeature,
   (state: AuthState) => state.registrationSuccess,
 );
+
+export const selectManagerId = createSelector(
+  selectAuthFeature,
+  (state: AuthState) => state.managerId,
+);

@@ -1,20 +1,20 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Product } from 'src/app/models/products/products.model';
-import { ToFormGroup } from 'src/app/models/shared.moelds';
+import { ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { productsCategoryies } from 'src/app/config/products/products.config';
-import { ProductsCategoryEnum } from 'src/app/enums/products/products.enum';
 import { MatSliderModule } from '@angular/material/slider';
-import { LatinLettersOnlyDirective } from 'src/app/shared/directives/latin-letters-only/latin-letters-only.directive';
-import { SelectOnFocusDirective } from 'src/app/shared/directives/select-on-focus/select-on-focus.directive';
 import { ButtonComponent } from '../../buttons/button/button.component';
 import { DialogLayoutComponent } from '../../layouts/dialog-layout/dialog-layout.component';
+import { productsCategoryies } from '@app/shared/config/products/products.config';
+import { LatinLettersOnlyDirective } from '@app/shared/directives/latin-letters-only/latin-letters-only.directive';
+import { SelectOnFocusDirective } from '@app/shared/directives/select-on-focus/select-on-focus.directive';
+import { ProductsCategoryEnum } from '@app/shared/enums/products/products.enum';
+import { Product } from '@app/shared/models/products/products.model';
+import { ToFormGroup } from '@app/shared/models/shared.moelds';
 
 @Component({
   selector: 'app-edit-post-dialog',

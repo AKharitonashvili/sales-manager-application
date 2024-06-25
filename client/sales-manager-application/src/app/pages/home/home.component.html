@@ -1,10 +1,15 @@
 <main class="flex flex-col gap-4 md:p-0">
-  <header class="flex bg-gray-800 p-4">
+  <header class="flex bg-secondary p-4">
     <nav class="flex gap-4">
-      <app-button [text]="'Products'" [routerLink]="'products'"></app-button>
+      <app-button
+        [text]="'Products'"
+        [routerLink]="'products'"
+        [customClasses]="'bg-transparent border-0'"
+      ></app-button>
       <app-button
         [text]="'Sales Managers'"
         [routerLink]="'sales-managers'"
+        [customClasses]="'bg-transparent border-0'"
       ></app-button>
     </nav>
   </header>

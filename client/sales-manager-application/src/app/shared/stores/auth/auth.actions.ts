@@ -1,12 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
+import { SalesManager } from '../../models/sales-managers/sales-managers.models';
 
 export const login = createAction(
   '[Auth] Login',
   props<{ username: string; password: string }>(),
 );
 
-export const loginSuccess = createAction('[Auth] Login Success');
+export const loginSuccess = createAction(
+  '[Auth] Login Success',
+  props<{ managerId: string }>(),
+);
 
 export const loginFailure = createAction(
   '[Auth] Login Failure',

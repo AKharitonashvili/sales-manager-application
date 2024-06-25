@@ -8,9 +8,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ButtonComponent } from '../../buttons/button/button.component';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ToFormGroup } from 'src/app/models/shared.moelds';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({

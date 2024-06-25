@@ -38,6 +38,9 @@
       </ng-container>
 
       <ng-container buttons>
+        <ng-container *ngIf="vm.managerId">
+          <app-button text="Sell" (onClick)="openEditProductDialog(item)" />
+        </ng-container>
         <app-button text="Edit" (onClick)="openEditProductDialog(item)" />
         <app-button text="Delete" (onClick)="deleteProduct(item.id ?? '')" />
       </ng-container>

@@ -4,33 +4,18 @@ import { of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { AuthActions } from '.';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Injectable()
 export class AuthEffects {
   login$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AuthActions.login),
-      tap(console.log),
       switchMap(({ username, password }) =>
         this.authService.login({ username, password }).pipe(
-          map(() => AuthActions.loginSuccess()),
+          map(({ id }) => AuthActions.loginSuccess({ managerId: id })),
           tap(() => this.router.navigateByUrl('/home')),
           catchError((error) => of(AuthActions.loginFailure({ error }))),
-        ),
-      ),
-    );
-  });
-
-  checkIfLoggedIn$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(AuthActions.checkIfLoggedIn),
-      switchMap(() =>
-        this.authService.isLoggedIn().pipe(
-          map(() => AuthActions.checkIfLoggedInSuccess({ isLoggedIn: true })),
-          catchError((error) =>
-            of(AuthActions.checkIfLoggedInFailure({ error })),
-          ),
         ),
       ),
     );

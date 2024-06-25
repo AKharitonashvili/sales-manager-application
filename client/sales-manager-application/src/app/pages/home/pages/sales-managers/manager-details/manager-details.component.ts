@@ -1,16 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable, combineLatest, map, take, tap } from 'rxjs';
-import {
-  salesManagersActions,
-  salesManagersSelectors,
-} from 'src/app/stores/sales-managers';
+import { Observable, combineLatest, map } from 'rxjs';
+import { CardComponent } from '@app/shared/ui/cards/card/card.component';
 import { ActivatedRoute } from '@angular/router';
-import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
-import { DetailsCardComponent } from 'src/app/shared/ui/cards/details-card/details-card.component';
-import { CardComponent } from 'src/app/shared/ui/cards/card/card.component';
-import { Product, SoldProduct } from 'src/app/models/products/products.model';
+import { SalesManager } from '@app/shared/models/sales-managers/sales-managers.models';
+import {
+  salesManagersSelectors,
+  salesManagersActions,
+} from '@app/shared/stores/sales-managers';
+import { DetailsCardComponent } from '@app/shared/ui/cards/details-card/details-card.component';
 
 @Component({
   selector: 'app-manager-details',

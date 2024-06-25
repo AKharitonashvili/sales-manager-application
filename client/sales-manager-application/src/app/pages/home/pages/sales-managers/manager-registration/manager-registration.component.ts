@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginAndRegisterLayoutComponent } from 'src/app/shared/ui/layouts/login-and-register-layout/login-and-register-layout.component';
 import {
   FormControl,
   FormGroup,
@@ -11,12 +10,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  salesManagersActions,
-  salesManagersSelectors,
-} from 'src/app/stores/sales-managers';
-import { Observable, combineLatest, filter, take } from 'rxjs';
-import { AuthActions, AuthSelectors } from 'src/app/stores/auth';
+import { AuthActions, AuthSelectors } from '@app/shared/stores/auth';
+import { LoginAndRegisterLayoutComponent } from '@app/shared/ui/layouts/login-and-register-layout/login-and-register-layout.component';
+import { filter, take } from 'rxjs';
 
 @Component({
   selector: 'app-manager-registration',

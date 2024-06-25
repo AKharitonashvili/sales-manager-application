@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { Product, SoldProduct } from 'src/app/models/products/products.model';
-import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
+import { SoldProduct } from '../../models/products/products.model';
+import { SalesManager } from '../../models/sales-managers/sales-managers.models';
 
 export const loadSalesManagers = createAction(
   '[SalesManagers] Load SalesManagers',

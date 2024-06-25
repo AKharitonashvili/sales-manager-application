@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
-import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
 import { salesManagersActions } from '.';
-import { Product, SoldProduct } from 'src/app/models/products/products.model';
+import { SoldProduct } from '../../models/products/products.model';
+import { SalesManager } from '../../models/sales-managers/sales-managers.models';
 
 export interface SalesManagersState {
   loading: boolean;

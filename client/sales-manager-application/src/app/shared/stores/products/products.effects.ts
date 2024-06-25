@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { ProductsActions } from '.';
-import { Router } from '@angular/router';
-import { productsMock } from '../../shared/mock/products.mock';
-import { ProductsService } from 'src/app/services/products/products.service';
+import { ProductsService } from '../../services/products/products.service';
 
 @Injectable()
 export class ProductsEffects {

@@ -1,22 +1,22 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageLayoutComponent } from 'src/app/shared/ui/layouts/page-layout/page-layout.component';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ToFormGroup } from 'src/app/models/shared.moelds';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { Observable, combineLatest, map, startWith, debounceTime } from 'rxjs';
-import { SalesManager } from 'src/app/models/sales-managers/sales-managers.models';
-import { Store } from '@ngrx/store';
-import {
-  salesManagersActions,
-  salesManagersSelectors,
-} from 'src/app/stores/sales-managers';
-import { CardComponent } from 'src/app/shared/ui/cards/card/card.component';
-import { ButtonComponent } from 'src/app/shared/ui/buttons/button/button.component';
 import { Router } from '@angular/router';
+import { CardComponent } from '@app/shared/ui/cards/card/card.component';
+import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { SalesManager } from '@app/shared/models/sales-managers/sales-managers.models';
+import { ToFormGroup } from '@app/shared/models/shared.moelds';
+import {
+  salesManagersSelectors,
+  salesManagersActions,
+} from '@app/shared/stores/sales-managers';
+import { ButtonComponent } from '@app/shared/ui/buttons/button/button.component';
+import { PageLayoutComponent } from '@app/shared/ui/layouts/page-layout/page-layout.component';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-sales-managers',

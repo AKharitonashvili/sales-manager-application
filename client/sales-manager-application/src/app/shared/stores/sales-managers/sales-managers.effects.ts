@@ -3,10 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { salesManagersActions } from '.';
-import { salesManagersMock } from 'src/app/shared/mock/sales-managers.mock';
-import { productsSoldByProducts } from 'src/app/shared/mock/products.mock';
-import { SalesManagersService } from 'src/app/services/sales-managers/sales-managers.service';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { productsSoldByProducts } from '../../mock/products.mock';
+import { AuthService } from '../../services/auth/auth.service';
+import { SalesManagersService } from '../../services/sales-managers/sales-managers.service';
 
 @Injectable()
 export class SalesManagersEffects {
