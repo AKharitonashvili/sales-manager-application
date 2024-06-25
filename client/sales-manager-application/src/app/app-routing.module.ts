@@ -27,9 +27,9 @@ const routes: Routes = [
       {
         path: 'sales-managers/register',
         loadComponent: () =>
-          import(
-            './pages/home/pages/sales-managers//manager-registration/manager-registration.component'
-          ).then((x) => x.ManagerRegistrationComponent),
+          import('./pages/register/register.component').then(
+            (x) => x.RegisterComponent,
+          ),
       },
       {
         path: 'sales-managers/:id',
@@ -44,6 +44,13 @@ const routes: Routes = [
     path: 'login',
     loadComponent: () =>
       import('./pages/login/login.component').then((x) => x.LoginComponent),
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register.component').then(
+        (x) => x.RegisterComponent,
+      ),
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   // { path: '**', component: PageNotFoundComponent },

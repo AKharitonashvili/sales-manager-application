@@ -13,8 +13,4 @@ import { AuthActions } from './shared/stores/auth';
   standalone: true,
   imports: [RouterModule, LoginComponent, CommonModule],
 })
-export class AppComponent {
-  constructor(private store: Store) {
-    this.store.dispatch(AuthActions.checkIfLoggedIn());
-  }
-}
+export class AppComponent {}

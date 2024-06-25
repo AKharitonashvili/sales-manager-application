@@ -5,11 +5,6 @@ export const AUTH_FEATURE_KEY = 'Auth';
 
 const selectAuthFeature = createFeatureSelector<AuthState>(AUTH_FEATURE_KEY);
 
-export const selectAuth = createSelector(
-  selectAuthFeature,
-  (state: AuthState) => state.isLoggedIn,
-);
-
 export const selectAuthLoading = createSelector(
   selectAuthFeature,
   (state: AuthState) => state.loading,

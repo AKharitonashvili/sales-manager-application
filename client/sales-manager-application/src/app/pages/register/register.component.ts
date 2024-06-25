@@ -15,7 +15,7 @@ import { LoginAndRegisterLayoutComponent } from '@app/shared/ui/layouts/login-an
 import { filter, take } from 'rxjs';
 
 @Component({
-  selector: 'app-manager-registration',
+  selector: 'app-register',
   standalone: true,
   imports: [
     CommonModule,
@@ -24,11 +24,11 @@ import { filter, take } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
   ],
-  templateUrl: './manager-registration.component.html',
-  styleUrls: ['./manager-registration.component.scss'],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ManagerRegistrationComponent {
+export class RegisterComponent {
   formGroup: FormGroup = new FormGroup({
     username: new FormControl<string | null>('', {
       validators: [Validators.required, Validators.minLength(4)],

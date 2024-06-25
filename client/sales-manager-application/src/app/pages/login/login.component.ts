@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 import { AuthActions } from '@app/shared/stores/auth';
 import { ButtonComponent } from '@app/shared/ui/buttons/button/button.component';
 import { LoginAndRegisterLayoutComponent } from '@app/shared/ui/layouts/login-and-register-layout/login-and-register-layout.component';
@@ -37,9 +38,16 @@ export class LoginComponent {
     }),
   });
 
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {}
 
   handleLogin() {
     this.store.dispatch(AuthActions.login(this.formGroup.value));
+  }
+
+  redirectToRegister() {
+    this.router.navigateByUrl('/register');
   }
 }

@@ -3,31 +3,43 @@
   [formGroup]="formGroup"
   (handleClick)="handleLogin()"
 >
-  <section class="flex justify-center">
-    <h1 class="text-3xl font-bold">Login</h1>
-  </section>
+  <ng-container content>
+    <section class="flex justify-center">
+      <h1 class="text-3xl font-bold">Login</h1>
+    </section>
 
-  <ng-container [formGroup]="formGroup">
-    <mat-form-field>
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username" />
-      <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
-        Username is required
-      </mat-error>
-      <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
-        Password minimal Length is 4
-      </mat-error>
-    </mat-form-field>
+    <ng-container [formGroup]="formGroup">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error *ngIf="formGroup.get('username')?.hasError('required')">
+          Username is required
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
+          Password minimal Length is 4
+        </mat-error>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input matInput formControlName="password" type="password" />
-      <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
-        Password is required
-      </mat-error>
-      <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
-        Password minimal Length is 4
-      </mat-error>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+        <mat-error *ngIf="formGroup.get('password')?.hasError('required')">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="formGroup.get('password')?.hasError('minlength')">
+          Password minimal Length is 4
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+  </ng-container>
+  <ng-container additionalButtons>
+    <section class="flex w-full">
+      <app-button
+        text="Register"
+        class="w-full"
+        customClasses="w-full"
+        (click)="redirectToRegister()"
+      ></app-button>
+    </section>
   </ng-container>
 </app-login-and-register-layout>
