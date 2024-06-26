@@ -5,8 +5,6 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpErrorResponse,
-  HttpHandlerFn,
-  HttpInterceptorFn,
 } from '@angular/common/http';
 import {
   BehaviorSubject,
@@ -17,7 +15,7 @@ import {
   take,
   throwError,
 } from 'rxjs';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '@app/shared/services/auth/auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -26,9 +24,7 @@ export class TokenInterceptor implements HttpInterceptor {
     null,
   );
 
-  constructor(private authService: AuthService) {
-    console.log('intercept');
-  }
+  constructor(private authService: AuthService) {}
 
   intercept(
     req: HttpRequest<any>,

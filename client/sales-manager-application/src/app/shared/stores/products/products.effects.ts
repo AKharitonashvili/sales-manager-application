@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { ProductsActions } from '.';
 import { ProductsService } from '../../services/products/products.service';
+import { CacheService } from '@app/shared/services/cache/cache.service';
 
 @Injectable()
 export class ProductsEffects {
@@ -77,8 +78,27 @@ export class ProductsEffects {
     );
   });
 
+  invalidateCache$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(
+        ProductsActions.addProductSuccess,
+        ProductsActions.editProductSuccess,
+        ProductsActions.sellProductSuccess,
+        ProductsActions.deleteProductSuccess,
+        ProductsActions.invalidateCache,
+      ),
+      switchMap(() =>
+        of([]).pipe(
+          tap(() => this.cache.clearUrl('http://localhost:8000/api/products')),
+          map(() => ProductsActions.invalidateCacheSuccess()),
+        ),
+      ),
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private productsService: ProductsService,
+    private cache: CacheService,
   ) {}
 }

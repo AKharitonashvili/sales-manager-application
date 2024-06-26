@@ -60,3 +60,9 @@ export const loadSoldProductsByManagerFailure = createAction(
   '[SalesManagers] Load Sold Products By Manager Failure',
   props<{ error: string }>(),
 );
+
+export const invalidateCache = createAction('[SalesManagers] Invalidate Cache');
+
+export const invalidateCacheSuccess = createAction(
+  '[SalesManagers] Invalidate Cache Success',
+);

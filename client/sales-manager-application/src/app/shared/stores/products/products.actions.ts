@@ -72,3 +72,9 @@ export const sellProductFailure = createAction(
   '[Products] Sell Product Failure',
   props<{ error: string }>(),
 );
+
+export const invalidateCache = createAction('[Products] Invalidate Cache');
+
+export const invalidateCacheSuccess = createAction(
+  '[Products] Invalidate Cache Success',
+);
