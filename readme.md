@@ -38,3 +38,12 @@
     ```bash
     npm run dev
     ```
+## User Registration and Login
+
+1. Open the application in your browser (it should automatically open after running `ng serve --open`).
+
+2. Register a new user by navigating to the registration page and filling out the necessary details.
+
+3. Log in with the newly registered user credentials.
+
+4. Enjoy using the application!
