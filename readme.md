@@ -9,6 +9,7 @@
     ```bash
     cd client/sales-manager-application
     ```
+    
 3. Install the necessary dependencies:
 
     ```bash
