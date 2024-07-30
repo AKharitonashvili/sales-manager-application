@@ -48,4 +48,3 @@
 3. Log in with the newly registered user credentials.
 
 4. Enjoy using the application!
-
